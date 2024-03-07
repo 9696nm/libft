@@ -1,0 +1,12 @@
+.DS_Store
+.git
+git
+.vscode
+
+obj
+
+libft.a
+a.out
+
+libft-tester-tokyo
+libft-unit-test

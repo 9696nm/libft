@@ -6,7 +6,7 @@
 /*   By: hmori <hmori@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 12:26:12 by hmori             #+#    #+#             */
-/*   Updated: 2023/10/19 20:06:40 by hmori            ###   ########.fr       */
+/*   Updated: 2024/03/07 19:31:06 by hmori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (result == NULL)
 		return (NULL);
 	result[size] = '\0';
-	while (size > 0)
-	{
-		result[size - 1] = ((unsigned char *)s)[start + size - 1];
-		size--;
-	}
+	while (size-- > 0)
+		result[size] = ((unsigned char *)s)[start + size];
 	return ((char *)result);
 }
 

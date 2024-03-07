@@ -6,7 +6,7 @@
 /*   By: hmori <hmori@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:07:54 by hmori             #+#    #+#             */
-/*   Updated: 2023/10/14 16:20:21 by hmori            ###   ########.fr       */
+/*   Updated: 2024/03/07 19:26:49 by hmori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,8 @@ void	*ft_memcpy(void *buf1, const void *buf2, size_t n)
 	ch_buf2 = (unsigned char *)buf2;
 	if (ch_buf1 == NULL && ch_buf2 == NULL)
 		return (NULL);
-	while (n > 0)
-	{
-		ch_buf1[n - 1] = ch_buf2[n - 1];
-		n--;
-	}
+	while (n-- > 0)
+		ch_buf1[n] = ch_buf2[n];
 	return (ch_buf1);
 }
 

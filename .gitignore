@@ -8,5 +8,6 @@ obj
 libft.a
 a.out
 
+tester
 libft-tester-tokyo
 libft-unit-test

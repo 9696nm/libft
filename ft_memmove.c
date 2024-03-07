@@ -6,7 +6,7 @@
 /*   By: hmori <hmori@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 17:07:36 by hmori             #+#    #+#             */
-/*   Updated: 2023/10/14 21:28:03 by hmori            ###   ########.fr       */
+/*   Updated: 2024/03/07 19:27:31 by hmori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ static void	forword(unsigned char *ch_dest, unsigned char *ch_src, size_t n)
 
 static void	revers(unsigned char *ch_dest, unsigned char *ch_src, size_t n)
 {
-	while (n > 0)
-	{
-		ch_dest[n - 1] = ch_src[n - 1];
-		n--;
-	}
+	while (n-- > 0)
+		ch_dest[n] = ch_src[n];
 }
 
 void	*ft_memmove(void *dest, const void *src, size_t n)

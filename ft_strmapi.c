@@ -6,7 +6,7 @@
 /*   By: hmori <hmori@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 18:25:38 by hmori             #+#    #+#             */
-/*   Updated: 2023/10/14 21:31:23 by hmori            ###   ########.fr       */
+/*   Updated: 2024/03/07 19:30:16 by hmori            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	if (result == NULL)
 		return (NULL);
 	result[size] = '\0';
-	while (size > 0)
-	{
-		result[size - 1]
-			= (unsigned char)f((unsigned int)size - 1, s[size - 1]);
-		size--;
-	}
+	while (size-- > 0)
+		result[size] = (unsigned char)f((unsigned int)size, s[size]);
 	return ((char *)result);
 }
 

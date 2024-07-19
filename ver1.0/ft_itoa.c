@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmori <hmori@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hmori/azusa <sagiri.mori@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:32:00 by hmori             #+#    #+#             */
-/*   Updated: 2023/11/08 14:45:05 by hmori            ###   ########.fr       */
+/*   Updated: 2024/04/19 03:18:21 by hmori/azusa      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static size_t	about_len(int nbr, int *sing)
 
 	len = 0;
 	*sing = 1;
-	if (nbr < 0 && len++ == 0)
+	if (nbr < 0 && len++)
 		*sing *= -1;
 	while (len++ < 0 || !(-10 < nbr && nbr < 10))
 		nbr /= 10;

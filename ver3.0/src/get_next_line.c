@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:58:22 by hmori             #+#    #+#             */
-/*   Updated: 2024/09/07 01:19:48 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/01/26 12:14:49 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ static char	*na_strchr(const char *source, int c)
 	return ((char *)source);
 }
 
-static int	memry_alloc(int fd)
+static int	memry_alloc(int fd, char *memry[])
 {
 	char	*str;
 
-	if (g_memry[fd] == NULL)
+	if (memry[fd] == NULL)
 		str = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	else
 		return (0);
 	if (str == NULL)
 		return (1);
 	*str = '\0';
-	g_memry[fd] = str;
+	memry[fd] = str;
 	return (0);
 }
 
@@ -52,26 +52,42 @@ static char	*rescopy(t_mem lst, char **oldres)
 
 char	*get_next_line(int fd)
 {
-	t_mem		lst;
+	t_mem	lst;
+	char	*m[FD_MAX];
 
 	lst.result = malloc(sizeof(char));
 	*lst.result = '\0';
 	lst.read_len = BUFFER_SIZE;
-	while (lst.read_len && 0 <= fd && fd < FD_MAX && (memry_alloc(fd) == 0))
+	while (lst.read_len && 0 <= fd && fd < FD_MAX && (memry_alloc(fd, m) == 0))
 	{
 		ft_bzero(lst.pull, BUFFER_SIZE + 1);
-		if (*g_memry[fd] == '\0')
+		if (*m[fd] == '\0')
 			lst.read_len = read(fd, lst.pull, BUFFER_SIZE);
 		else
-			ft_strlcpy(lst.pull, g_memry[fd] + 1, ft_strlen(g_memry[fd]) + 1);
+			ft_strlcpy(lst.pull, m[fd] + 1, ft_strlen(m[fd]) + 1);
 		if (lst.read_len < 0 || lst.result == NULL)
 			break ;
-		ft_strlcpy(g_memry[fd], na_strchr(lst.pull, '\n'), lst.read_len + 1);
+		ft_strlcpy(m[fd], na_strchr(lst.pull, '\n'), lst.read_len + 1);
 		lst.result = rescopy(lst, &(lst.result));
-		if (*g_memry[fd] == '\n' || (*lst.result && lst.read_len == 0))
+		if (*m[fd] == '\n' || (*lst.result && lst.read_len == 0))
 			return (lst.result);
 	}
 	if (lst.result)
 		free(lst.result);
 	return (NULL);
 }
+
+// static int	memry_alloc(int fd)
+// {
+// 	char	*str;
+
+// 	if (g_memry[fd] == NULL)
+// 		str = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+// 	else
+// 		return (0);
+// 	if (str == NULL)
+// 		return (1);
+// 	*str = '\0';
+// 	g_memry[fd] = str;
+// 	return (0);
+// }

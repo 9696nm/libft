@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:07:10 by hmori             #+#    #+#             */
-/*   Updated: 2025/01/26 16:13:02 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/01/26 18:27:02 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int		ft_toupper(int num);
 
 void	ft_putbit(unsigned long int num, uint8_t bytesize);
 int		ft_isspace(int i);
+int		ft_isvalue(char *str);
 
 #endif

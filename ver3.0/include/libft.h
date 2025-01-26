@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:07:10 by hmori             #+#    #+#             */
-/*   Updated: 2025/01/23 23:36:40 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/01/26 16:13:02 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdint.h>
 # include <stddef.h>
 # include <limits.h>
+# include <errno.h>
 
 typedef struct s_list
 {
@@ -72,5 +73,6 @@ int		ft_tolower(int num);
 int		ft_toupper(int num);
 
 void	ft_putbit(unsigned long int num, uint8_t bytesize);
+int		ft_isspace(int i);
 
 #endif

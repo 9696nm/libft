@@ -39,8 +39,9 @@ typedef struct s_mem
 	char	pull[BUFFER_SIZE + 1];
 }	t_mem;
 
-// static char	*g_memry[FD_MAX];
+static char	*g_memry[FD_MAX];
 
 char	*get_next_line(int fd);
+// char	*get_next_line(int fd, char	*memry[FD_MAX]);
 
 #endif

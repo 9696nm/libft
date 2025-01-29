@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:07:10 by hmori             #+#    #+#             */
-/*   Updated: 2025/01/26 18:27:02 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/01/29 14:18:28 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 char	**ft_split(char const *str, char c);
-char	**ft_spplit(char const *src, char *cstr);
 char	*ft_strchr(const char *source, int c);
 char	*ft_strdup(const char *s1);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
@@ -75,5 +74,8 @@ int		ft_toupper(int num);
 void	ft_putbit(unsigned long int num, uint8_t bytesize);
 int		ft_isspace(int i);
 int		ft_isvalue(char *str);
+int		*ft_split_toi(char const *src, char c);
 
 #endif
+
+// char	**ft_spplit(char const *src, char *cstr);

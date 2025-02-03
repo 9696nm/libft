@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:29:31 by hmori             #+#    #+#             */
-/*   Updated: 2025/01/26 16:21:35 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/01/29 16:35:00 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_putnbr_fd(int nbr, int fd)
 	if (-1 < nbr * sing)
 		sing = -1;
 	else
-		ft_putchar_fd('-', 1);
+		ft_putchar_fd('-', fd);
 	if (nbr * sing < -9)
 		ft_putnbr_fd(nbr * sing / -10, fd);
 	ft_putchar_fd((nbr * sing % 10) * -1 + '0', fd);

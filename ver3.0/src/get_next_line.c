@@ -12,6 +12,8 @@
 
 #include "get_next_line.h"
 
+static char	*g_memry[FD_MAX];
+
 static char	*na_strchr(const char *source, int c)
 {
 	while (*source)

@@ -6,7 +6,7 @@
 #    By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/27 18:46:16 by hmori             #+#    #+#              #
-#    Updated: 2025/01/29 14:19:28 by hana/hmori       ###   ########.fr        #
+#    Updated: 2025/02/20 21:38:26 by hana/hmori       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,11 @@ SRC_FILES		=	ft_isdigit.c ft_memset.c ft_strdup.c ft_strncmp.c ft_atoi.c	ft_ispr
 					ft_isalpha.c ft_memcpy.c ft_split.c ft_strlen.c ft_tolower.c\
 					ft_isascii.c ft_memmove.c ft_strchr.c ft_strmapi.c ft_toupper.c\
 					ft_putbit.c ft_isspace.c ft_isvalue.c ft_split_toi.c
-#					ft_spplit.c
 
 BONUS_SRC_FILES	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c\
 					ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
-EXTRA_SRC_FILES	=	get_next_line.c
+EXTRA_SRC_FILES	=	get_next_line.c q_rsqrt.c
 
 OBJ_DIR			=	obj
 OBJ_FILES		=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC_FILES))

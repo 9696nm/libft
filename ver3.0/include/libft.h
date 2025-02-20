@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:07:10 by hmori             #+#    #+#             */
-/*   Updated: 2025/01/29 14:18:28 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/20 21:38:45 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,3 @@ int		ft_isvalue(char *str);
 int		*ft_split_toi(char const *src, char c);
 
 #endif
-
-// char	**ft_spplit(char const *src, char *cstr);

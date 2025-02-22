@@ -6,13 +6,13 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 21:56:40 by hmori             #+#    #+#             */
-/*   Updated: 2025/01/26 16:22:24 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/22 13:16:21 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
 	size_t	count;
 

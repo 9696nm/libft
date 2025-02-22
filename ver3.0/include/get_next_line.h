@@ -6,7 +6,7 @@
 /*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:33:31 by hmori             #+#    #+#             */
-/*   Updated: 2025/01/26 12:12:06 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/02/22 18:29:43 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@
 #  define BUFFER_SIZE 4096
 # endif
 
-# if BUFFER_SIZE > 65536
+# if BUFFER_SIZE < 0
+# error "BUFFER_SIZE must be a positive number"
+# endif
+
+# if 65536 < BUFFER_SIZE
 #  undef BUFFER_SIZE
 #  define BUFFER_SIZE 65536
 # endif
@@ -40,6 +44,16 @@ typedef struct s_mem
 }	t_mem;
 
 char	*get_next_line(int fd);
-// char	*get_next_line(int fd, char	*memry[FD_MAX]);
 
 #endif
+
+// # include <limits.h> //PIPE_BUF
+
+// # ifndef BUFFER_SIZE
+// #  define BUFFER_SIZE PIPE_BUF
+// # endif
+
+// # if (PIPE_DEF_BUFFERS * PIPE_BUF) < BUFFER_SIZE
+// #  undef BUFFER_SIZE
+// #  define BUFFER_SIZE (PIPE_DEF_BUFFERS * PIPE_BUF)
+// # endif

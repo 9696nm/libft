@@ -13,11 +13,10 @@
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 FLAGS			=	-Iinclude
-
 MAKEFLAGS		+=	--no-print-directory
 
-INCLUDE			=	include/libft.h
-EXTRA_INCLUDE	=	include/get_next_line.h
+NAME			=	libft.a
+
 
 SRC_DIR			=	src
 SRC_FILES		=	ft_isdigit.c ft_memset.c ft_strdup.c ft_strncmp.c ft_atoi.c	ft_isprint.c\
@@ -33,40 +32,38 @@ BONUS_SRC_FILES	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lst
 
 EXTRA_SRC_FILES	=	get_next_line.c q_rsqrt.c
 
-OBJ_DIR			=	obj
-OBJ_FILES		=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
-BONUS_OBJ_FILES	=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(BONUS_SRC_FILES))
-EXTRA_OBJ_FILES	=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(EXTRA_SRC_FILES))
-
-NAME = libft.a
-
-ifeq ($(flag),2)
-TARGET_OBJ		=	$(OBJ_FILES) $(BONUS_OBJ_FILES) $(EXTRA_OBJ_FILES)
-TARGET_INCLUDE	=	$(INCLUDE) $(EXTRA_INCLUDE)
-else ifeq ($(flag),1)
-TARGET_OBJ		=	$(OBJ_FILES) $(BONUS_OBJ_FILES)
-TARGET_INCLUDE	=	$(INCLUDE)
+ifeq ($(FLAG), extra)
+TARGET_SRC		=	$(SRC_FILES) $(BONUS_SRC_FILES) $(EXTRA_SRC_FILES)
+else ifeq ($(FLAG), bonus)
+TARGET_SRC		=	$(SRC_FILES) $(BONUS_SRC_FILES)
 else
-TARGET_OBJ		=	$(OBJ_FILES)
-TARGET_INCLUDE	=	$(INCLUDE)
+TARGET_SRC		=	$(SRC_FILES)
 endif
+
+OBJ_DIR			=	obj
+OBJ_FILES		=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(TARGET_SRC))
+
+DEPENDENCY		=	$(patsubst %.c, $(OBJ_DIR)/%.d, $(TARGET_SRC))
+
 
 all: $(NAME)
 
-$(NAME): $(TARGET_OBJ) $(TARGET_INCLUDE)
-	ar rcs $@ $(TARGET_OBJ)
+$(NAME): $(OBJ_FILES)
+	ar rcs $@ $(OBJ_FILES)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(FLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(FLAGS) -MMD -MP -c $< -o $@
+
+-include $(DEPENDENCY)
 
 bonus:
-	@$(MAKE) all flag=1
+	@$(MAKE) all FLAG=bonus
 
 extra:
-	@$(MAKE) all flag=2
+	@$(MAKE) all FLAG=extra
 
 clean:
 	@rm -rf $(OBJ_DIR)

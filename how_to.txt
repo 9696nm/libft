@@ -9,6 +9,7 @@
 		ft_isprint
 		ft_isascii
 		ft_isspace
+		ft_isvalue
 	大文字小文字変換するよ
 		ft_toupper
 		ft_tolower
@@ -53,11 +54,12 @@
 	ft_striteri (char *の一文字ずつに関数を適用させるよ)
 	ft_strmapi (適用したものを複製するよ)
 
--fd-
+-put-
 	ft_putchar_fd (char)
 	ft_putstr_fd (char *)
 	ft_putendl_fd (さらに改行)
 	ft_putnbr_fd (int)
+	ft_putbit (long)
 
 -list-
 	新しいリストを作るよ

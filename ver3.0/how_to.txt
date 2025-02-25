@@ -8,6 +8,7 @@
 		ft_isalnum
 		ft_isprint
 		ft_isascii
+		ft_isspace
 	大文字小文字変換するよ
 		ft_toupper
 		ft_tolower
@@ -41,7 +42,6 @@
 		ft_strjoin
 	文字列をトリムして複製するよ
 		ft_split (charで区切る) 
-		//ft_spplit (stringで区切る) !!休止中
 		ft_strtrim (char set,前後からやるよ)
 		ft_split_toi (int配列として返す 配列の先頭にlenghが格納される)
 
@@ -84,3 +84,5 @@
 -extra-
 	一行ずつ読むよ
 		get_next_line
+	高速逆平方根を計算するよ
+		q_rsqrt

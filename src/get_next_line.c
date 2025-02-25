@@ -83,7 +83,7 @@ __attribute__((destructor)) static void	global_free(void)
 	int	fd;
 
 	fd = 0;
-	while (++fd <= FD_MAX)
+	while (fd <= FD_MAX)
 	{
 		if (g_memry[fd])
 			free(g_memry[fd]);

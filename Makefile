@@ -12,7 +12,7 @@
 
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
-FLAGS			=	-Iinclude
+FLAGS			=	-Iincludes
 MAKEFLAGS		+=	--no-print-directory
 
 NAME			=	libft.a

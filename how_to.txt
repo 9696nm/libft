@@ -24,6 +24,7 @@
 		ft_strnstr (文字列だよ)
 	文字列を比較するよ
 		ft_memcmp (byte用だよ)
+		ft_strcmp	(長さ指定せずに動かせるよ)
 		ft_strncmp (文字列用だよ nullとかね)
 
 	埋めれるよ

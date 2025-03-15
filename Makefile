@@ -18,7 +18,7 @@ CFLAGS			=	-Wall -Wextra -Werror
 FLAGS			=	-Iincludes
 MAKEFLAGS		+=	--no-print-directory
 
-SRC_DIR			=	srcs
+SRC_DIR			=	./srcs
 SRC_FILES		=	ft_isdigit.c ft_memset.c ft_strdup.c ft_strncmp.c ft_atoi.c	ft_isprint.c \
 					ft_putchar_fd.c ft_striteri.c ft_strnstr.c ft_bzero.c ft_itoa.c ft_putendl_fd.c \
 					ft_strjoin.c ft_strrchr.c ft_calloc.c ft_memchr.c ft_putnbr_fd.c ft_strlcat.c \
@@ -40,7 +40,7 @@ else
 TARGET_SRC		=	$(SRC_FILES)
 endif
 
-OBJ_DIR			=	objs
+OBJ_DIR			=	./objs
 OBJ_FILES		=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(TARGET_SRC))
 DEPENDENCY		=	$(patsubst %.c, $(OBJ_DIR)/%.d, $(TARGET_SRC))
 
@@ -75,17 +75,17 @@ extra:
 clean:
 	@if [ -d $(OBJ_DIR) ]; then \
 		rm -rf $(OBJ_DIR); \
-		echo $(RED)"Libft object deleted !"$(RESET); \
+		echo $(RED)"Libft $(OBJ_DIR) deleted !"$(RESET); \
 	else \
-		echo $(CYAN)"$(OBJ_DIR) is already deleted."$(RESET); \
+		echo $(CYAN)"Libft object is already deleted."$(RESET); \
 	fi
 
 fclean: clean
 	@if [ -f $(NAME) ]; then \
 		rm -f $(NAME); \
-		echo $(RED)"Libft archive deleted !"$(RESET); \
+		echo $(RED)"Libft $(NAME) deleted !"$(RESET); \
 	else \
-		echo $(CYAN)"$(NAME) is already deleted."$(RESET); \
+		echo $(CYAN)"Libft archive is already deleted."$(RESET); \
 	fi
 
 re: fclean all

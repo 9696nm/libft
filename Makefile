@@ -10,27 +10,27 @@
 #                                                                              #
 # **************************************************************************** #
 
+NAME			=	libft.a
+
+
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 FLAGS			=	-Iincludes
 MAKEFLAGS		+=	--no-print-directory
 
-NAME			=	libft.a
+SRC_DIR			=	srcs
+SRC_FILES		=	ft_isdigit.c ft_memset.c ft_strdup.c ft_strncmp.c ft_atoi.c	ft_isprint.c \
+					ft_putchar_fd.c ft_striteri.c ft_strnstr.c ft_bzero.c ft_itoa.c ft_putendl_fd.c \
+					ft_strjoin.c ft_strrchr.c ft_calloc.c ft_memchr.c ft_putnbr_fd.c ft_strlcat.c \
+					ft_strtrim.c ft_isalnum.c ft_memcmp.c ft_putstr_fd.c ft_strlcpy.c ft_substr.c \
+					ft_isalpha.c ft_memcpy.c ft_split.c ft_strlen.c ft_tolower.c \
+					ft_isascii.c ft_memmove.c ft_strchr.c ft_strmapi.c ft_toupper.c \
+					ft_putbit.c ft_isspace.c ft_isvalue.c ft_split_toi.c \
 
+BONUS_SRC_FILES	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
+					ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c \
 
-SRC_DIR			=	src
-SRC_FILES		=	ft_isdigit.c ft_memset.c ft_strdup.c ft_strncmp.c ft_atoi.c	ft_isprint.c\
-					ft_putchar_fd.c ft_striteri.c ft_strnstr.c ft_bzero.c ft_itoa.c ft_putendl_fd.c\
-					ft_strjoin.c ft_strrchr.c ft_calloc.c ft_memchr.c ft_putnbr_fd.c ft_strlcat.c\
-					ft_strtrim.c ft_isalnum.c ft_memcmp.c ft_putstr_fd.c ft_strlcpy.c ft_substr.c\
-					ft_isalpha.c ft_memcpy.c ft_split.c ft_strlen.c ft_tolower.c\
-					ft_isascii.c ft_memmove.c ft_strchr.c ft_strmapi.c ft_toupper.c\
-					ft_putbit.c ft_isspace.c ft_isvalue.c ft_split_toi.c
-
-BONUS_SRC_FILES	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c\
-					ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
-
-EXTRA_SRC_FILES	=	get_next_line.c q_rsqrt.c
+EXTRA_SRC_FILES	=	get_next_line.c q_rsqrt.c \
 
 ifeq ($(FLAG), extra)
 TARGET_SRC		=	$(SRC_FILES) $(BONUS_SRC_FILES) $(EXTRA_SRC_FILES)
@@ -40,16 +40,23 @@ else
 TARGET_SRC		=	$(SRC_FILES)
 endif
 
-OBJ_DIR			=	obj
+OBJ_DIR			=	objs
 OBJ_FILES		=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(TARGET_SRC))
-
 DEPENDENCY		=	$(patsubst %.c, $(OBJ_DIR)/%.d, $(TARGET_SRC))
+
+RED				=	"\033[1;31m"
+GREEN			= 	"\033[1;32m"
+YELLOW			=	"\033[1;33m"
+CYAN			=	"\033[1;36m"
+WHITE			=	"\033[1;37m"
+RESET			=	"\033[0m"
 
 
 all: $(NAME)
 
 $(NAME): $(OBJ_FILES)
 	ar rcs $@ $(OBJ_FILES)
+	@echo $(GREEN)"---Sccusse $(FLAG)!---"$(RESET)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -66,10 +73,20 @@ extra:
 	@$(MAKE) all FLAG=extra
 
 clean:
-	@rm -rf $(OBJ_DIR)
+	@if [ -d $(OBJ_DIR) ]; then \
+		rm -rf $(OBJ_DIR); \
+		echo $(RED)"Libft object deleted !"$(RESET); \
+	else \
+		echo $(CYAN)"$(OBJ_DIR) is already deleted."$(RESET); \
+	fi
 
 fclean: clean
-	@rm -f $(NAME)
+	@if [ -f $(NAME) ]; then \
+		rm -f $(NAME); \
+		echo $(RED)"Libft archive deleted !"$(RESET); \
+	else \
+		echo $(CYAN)"$(NAME) is already deleted."$(RESET); \
+	fi
 
 re: fclean all
 

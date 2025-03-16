@@ -62,7 +62,7 @@ all: $(NAME)
 $(NAME): $(OBJ_FILES)
 	ar rcs $@ $(OBJ_FILES)
 	@echo $(GREEN)"---Sccusse $(FLAG)!---"$(RESET)
-
+	
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 

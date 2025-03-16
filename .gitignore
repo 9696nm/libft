@@ -1,3 +1,4 @@
+# --- continuous ---
 .vscode
 .git
 
@@ -5,3 +6,6 @@ objs
 
 *.a
 *.out
+
+# --- add ---
+test*

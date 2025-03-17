@@ -54,7 +54,7 @@ static int	sizeliteral(char *str, int base)
 	return (0);
 }
 
-static long	basetoint(char *str, int base)
+static long	basetoint(char *str, char **endptr, int base)
 {
 	int			sing;
 	long int	nbr;
@@ -67,6 +67,7 @@ static long	basetoint(char *str, int base)
 	while (-1 < isbasedigit(*str, base))
 	{
 		nbr = nbr * base + (sing * isbasedigit(*str, base));
+		*endptr = str;
 		if ((sing == 1 && nbr < 0) || (sing == -1 && 0 < nbr))
 			errno = ERANGE;
 		if (sing == 1 && nbr < 0)
@@ -84,20 +85,22 @@ long	ft_strtol(const char *nptr, char **endptr, int base)
 	char		*str;
 
 	str = (char *)nptr;
-	while (ft_isspace(*str))
-		str++;
-	if (base == 0)
-		base = checkliteral(str);
-	if (2 <= base && base <= 36)
-		nbr = basetoint(str, base);
-	else
+	if (base < 0 || base == 1 || 36 < base)
 	{
 		errno = EINVAL;
-		return (0);
+		return (0L);
 	}
-	str += sizeliteral(str, base);
-	while (-1 < isbasedigit(*str, base))
-		str++;
-	*endptr = str;
+	if (ft_isvalue(str) == 0)
+		
+	// while (ft_isspace(*str))
+	// 	str++;
+	if (base == 0)
+		base = checkliteral(str);
+	if (ft_isdigit(*str) == 0)
+		*endptr = (char *)nptr;
+	else if (2 <= base && base <= 36)
+		nbr = basetoint(str, endptr, base);
+	else
+		nbr = 0;
 	return (nbr);
 }

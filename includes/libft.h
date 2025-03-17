@@ -77,4 +77,6 @@ int		ft_isspace(int i);
 int		ft_isvalue(char *str);
 int		*ft_split_toi(char const *src, char c);
 
+long	ft_strtol(const char *nptr, char **endptr, int base);
+
 #endif

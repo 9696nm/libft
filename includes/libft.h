@@ -18,6 +18,7 @@
 # include <stdint.h>
 # include <stddef.h>
 # include <limits.h>
+# include <stdbool.h>
 # include <errno.h>
 
 typedef struct s_list

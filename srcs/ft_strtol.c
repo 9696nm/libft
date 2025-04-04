@@ -12,6 +12,30 @@
 
 #include "libft.h"
 
+static int	checkliteral(const char **str, int base)
+{
+	if (**str == '-' || **str == '+')
+		*str++;
+	if (**str == '0')
+	{
+		if ((base == 0 || base == 2) && ft_toupper((*str)[1]) == 'B')
+		{
+			(*str) += 2;
+			return (2);
+		}
+		if ((base == 0 || base == 16) && ft_toupper((*str)[1]) == 'B')
+		{
+			(*str) += 2;
+			return (16);
+		}
+		if (base == 0)
+			return (8);
+	}
+	else if (base == 0)
+		return (10);
+	return (base);
+}
+
 static int	isbasedigit(int c, int base)
 {
 	if ('0' <= c && c <= ('0' + base - 1) && c <= '9')
@@ -23,51 +47,14 @@ static int	isbasedigit(int c, int base)
 	return (-1);
 }
 
-static int	checkliteral(char *str)
+static long	basetoint(const char *str, int base, int sing)
 {
-	if (*str == '-' || *str == '+')
-		str++;
-	if (ft_memcmp(str, "0", 1) == 0 && -1 < isbasedigit(*(str + 1), 8))
-		return (8);
-	if (ft_memcmp(str, "0x", 2) == 0 && -1 < isbasedigit(*(str + 2), 16))
-		return (16);
-	if (ft_memcmp(str, "0X", 2) == 0 && -1 < isbasedigit(*(str + 2), 16))
-		return (16);
-	return (10);
-}
-
-static int	sizeliteral(char *str, int base)
-{
-	int	len;
-
-	len = 0;
-	if (str[len] == '-' || str[len] == '+')
-		len++;
-	if (ft_memcmp(str + len, "0", 1) == 0 && base == 8)
-		len += 1;
-	if (ft_memcmp(str + len, "0x", 1) == 0 && base == 16)
-		len += 2;
-	if (ft_memcmp(str + len, "0X", 1) == 0 && base == 16)
-		len += 2;
-	if (-1 < isbasedigit(str[len], base))
-		return (len);
-	return (0);
-}
-
-static long	basetoint(char *str, char **endptr, int base)
-{
-	int			sing;
 	long int	nbr;
 
 	nbr = 0;
-	sing = 1;
-	if (*str == '-')
-		sing = -1;
-	str += sizeliteral(str, base);
 	while (-1 < isbasedigit(*str, base))
 	{
 		nbr = nbr * base + (sing * isbasedigit(*str, base));
-		*endptr = str;
 		if ((sing == 1 && nbr < 0) || (sing == -1 && 0 < nbr))
 			errno = ERANGE;
 		if (sing == 1 && nbr < 0)
@@ -79,28 +66,32 @@ static long	basetoint(char *str, char **endptr, int base)
 	return (nbr);
 }
 
-long	ft_strtol(const char *nptr, char **endptr, int base)
+long	__ft_strtol(const char *restrict nptr, char **restrict endptr,
+			int base, bool bin_cst)
 {
 	long int	nbr;
-	char		*str;
+	int			sing;
 
-	str = (char *)nptr;
 	if (base < 0 || base == 1 || 36 < base)
 	{
 		errno = EINVAL;
 		return (0L);
 	}
-	if (ft_isvalue(str) == 0)
-		
-	// while (ft_isspace(*str))
-	// 	str++;
-	if (base == 0)
-		base = checkliteral(str);
-	if (ft_isdigit(*str) == 0)
-		*endptr = (char *)nptr;
-	else if (2 <= base && base <= 36)
-		nbr = basetoint(str, endptr, base);
-	else
-		nbr = 0;
+	*endptr = (char *)nptr;
+	while (ft_isspace(*nptr))
+		nptr++;
+	sing = 1;
+	if (*nptr == '-' || *nptr == '+')
+		if (*nptr++ == '-')
+			sing = -1;
+	base = checkliteral(&nptr, base);
+	if (ft_isdigit(*nptr) == 0)
+		nbr = basetoint(nptr, base, sing);
+	*endptr = (char *)nptr;
 	return (nbr);
+}
+
+long	ft_strtol(const char *restrict nptr, char **restrict endptr, int base)
+{
+	return (__ft_strtol(nptr, endptr, base, false));
 }

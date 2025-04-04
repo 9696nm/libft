@@ -11,11 +11,12 @@
 # **************************************************************************** #
 
 NAME			=	libft.a
+PROJECT_NAME	=	Libft
 
 
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
-FLAGS			=	-Iincludes
+IFLAGS			=	-Iincludes
 MAKEFLAGS		+=	--no-print-directory
 
 SRC_DIR			=	./srcs
@@ -61,13 +62,13 @@ all: $(NAME)
 
 $(NAME): $(OBJ_FILES)
 	ar rcs $@ $(OBJ_FILES)
-	@echo $(GREEN)"---Sccusse $(FLAG)!---"$(RESET)
-	
+	@echo $(GREEN)"---$(PROJECT_NAME) Sccusse $(FLAG)!---"$(RESET)
+
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(FLAGS) -MMD -MP -c $< -o $@
+	$(CC) $(CFLAGS) $(IFLAGS) -MMD -MP -c $< -o $@
 
 -include $(DEPENDENCY)
 
@@ -80,21 +81,31 @@ extra:
 clean:
 	@if [ -d $(OBJ_DIR) ]; then \
 		rm -rf $(OBJ_DIR); \
-		echo $(RED)"Libft $(OBJ_DIR) deleted !"$(RESET); \
+		echo $(RED)"$(PROJECT_NAME) $(OBJ_DIR) has been deleted !"$(RESET); \
 	else \
-		echo $(CYAN)"Libft object is already deleted."$(RESET); \
+		echo $(CYAN)"$(PROJECT_NAME) object has already been deleted."$(RESET); \
 	fi
 
+ifeq ($(SKIP_CLEAN), 1)
+fclean:
+else
 fclean: clean
+endif
 	@if [ -f $(NAME) ]; then \
 		rm -f $(NAME); \
-		echo $(RED)"Libft $(NAME) deleted !"$(RESET); \
+		echo $(RED)"$(NAME) has been deleted !"$(RESET); \
 	else \
-		echo $(CYAN)"Libft archive is already deleted."$(RESET); \
+		echo $(CYAN)"$(PROJECT_NAME) archive has already been deleted."$(RESET); \
 	fi
 
 re: fclean all
 
+debug: $(NAME)
+	$(MAKE) -f debug_module/compile.mk $(MAKECMDGOALS)
+#	cc -Iincludes debug_module/strtol_module/org_main.c libft.a -o debug_module/org.out
+#	cc -Iincludes srcs/ft_strtol.c debug_module/strtol_module/ft_main.c libft.a -o debug_module/ft.out
+#	./debug_module/compile.sh
+
 .DEFAULT_GOAL := all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus debug

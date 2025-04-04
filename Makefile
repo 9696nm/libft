@@ -80,7 +80,11 @@ clean:
 		echo $(CYAN)"Libft object is already deleted."$(RESET); \
 	fi
 
+ifeq ($(SKIP_CLEAN), 1)
+fclean:
+else
 fclean: clean
+endif
 	@if [ -f $(NAME) ]; then \
 		rm -f $(NAME); \
 		echo $(RED)"Libft $(NAME) deleted !"$(RESET); \

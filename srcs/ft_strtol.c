@@ -101,30 +101,3 @@ long	ft_strtol(const char *nptr, char **endptr, int base)
 	*endptr = str;
 	return (nbr);
 }
-
-#include "stdio.h"
-#include "stdlib.h"
-
-#define TEST(nptr, base) \
-{ \
-	char	*endptr; \
-	long	nbr; \
-	int		errnbr; \
-	nbr = strtol(nptr, &endptr, base); \
-	errnbr = errno; \
-	printf("strtol    -> ret[%5li] endptr[%-8s] errno[%2i]\n", nbr, endptr, errnbr); \
-	errno = 0; \
-	nbr = ft_strtol(nptr, &endptr, base); \
-	errnbr = errno; \
-	printf("ft_strtol -> ret[%5li] endptr[%-8s] errno[%2i]\n", nbr, endptr, errnbr); \
-}
-
-int	main(void)
-{
-	TEST("    +100101110", 2);
-
-	/* error pattern */
-	// TEST("    +0x255", 8);
-	return (0);
-
-}

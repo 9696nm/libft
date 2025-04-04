@@ -1,7 +1,6 @@
 # --- continuous ---
 .DS_Store
 .vscode
-.git
 
 objs
 

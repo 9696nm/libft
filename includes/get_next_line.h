@@ -28,7 +28,7 @@
 # endif
 
 # if BUFFER_SIZE < 0
-# error "BUFFER_SIZE must be a positive number"
+#  error "BUFFER_SIZE must be a positive number"
 # endif
 
 # if 65536 < BUFFER_SIZE

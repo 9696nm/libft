@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+         #
+#    By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/27 18:46:16 by hmori             #+#    #+#              #
-#    Updated: 2025/02/20 21:38:26 by hana/hmori       ###   ########.fr        #
+#    Updated: 2025/06/26 20:29:01 by hana/hmori       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@ PROJECT_NAME	=	Libft
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 IFLAGS			=	-Iincludes
-MAKEFLAGS		+=	--no-print-directory
+MAKEFLAGS		+=	--no-print-directory 
 
-SRC_DIR			=	./srcs
+SRC_DIR			=	srcs/
 SRC_FILES		=	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 					ft_memchr.c ft_memcmp.c \
 					ft_strlen.c ft_strchr.c ft_strrchr.c ft_strnstr.c ft_strcmp.c ft_strncmp.c \
@@ -36,7 +36,7 @@ SRC_FILES		=	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 BONUS_SRC_FILES	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
 					ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c \
 
-EXTRA_SRC_FILES	=	get_next_line.c q_rsqrt.c \
+EXTRA_SRC_FILES	=	get_next_line.c q_rsqrt.c ft_strtol.c \
 
 ifeq ($(FLAG), extra)
 TARGET_SRC		=	$(SRC_FILES) $(BONUS_SRC_FILES) $(EXTRA_SRC_FILES)
@@ -46,9 +46,9 @@ else
 TARGET_SRC		=	$(SRC_FILES)
 endif
 
-OBJ_DIR			=	./objs
-OBJ_FILES		=	$(patsubst %.c, $(OBJ_DIR)/%.o, $(TARGET_SRC))
-DEPENDENCY		=	$(patsubst %.c, $(OBJ_DIR)/%.d, $(TARGET_SRC))
+OBJ_DIR			=	objs/
+OBJ_FILES		=	$(patsubst %.c, $(OBJ_DIR)%.o, $(TARGET_SRC))
+DEPENDENCY		=	$(patsubst %.c, $(OBJ_DIR)%.d, $(TARGET_SRC))
 
 RED				=	"\033[1;31m"
 GREEN			= 	"\033[1;32m"
@@ -67,7 +67,7 @@ $(NAME): $(OBJ_FILES)
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(IFLAGS) -MMD -MP -c $< -o $@
 
 -include $(DEPENDENCY)
@@ -99,12 +99,6 @@ endif
 	fi
 
 re: fclean all
-
-debug: $(NAME)
-	$(MAKE) -f debug_module/compile.mk $(MAKECMDGOALS)
-#	cc -Iincludes debug_module/strtol_module/org_main.c libft.a -o debug_module/org.out
-#	cc -Iincludes srcs/ft_strtol.c debug_module/strtol_module/ft_main.c libft.a -o debug_module/ft.out
-#	./debug_module/compile.sh
 
 .DEFAULT_GOAL := all
 

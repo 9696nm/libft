@@ -9,4 +9,5 @@ objs
 *.log
 
 # --- add ---
-
+libft-test-tokyo
+libft-tester-azusa

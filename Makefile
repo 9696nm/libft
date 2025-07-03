@@ -6,7 +6,7 @@
 #    By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/27 18:46:16 by hmori             #+#    #+#              #
-#    Updated: 2025/06/26 20:29:01 by hana/hmori       ###   ########.fr        #
+#    Updated: 2025/07/04 04:45:23 by hana/hmori       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SRC_FILES		=	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 BONUS_SRC_FILES	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
 					ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c \
 
-EXTRA_SRC_FILES	=	get_next_line.c q_rsqrt.c ft_strtol.c \
+EXTRA_SRC_FILES	=	get_next_line.c q_rsqrt.c
+# ft_strtol.c
 
 ifeq ($(FLAG), extra)
 TARGET_SRC		=	$(SRC_FILES) $(BONUS_SRC_FILES) $(EXTRA_SRC_FILES)

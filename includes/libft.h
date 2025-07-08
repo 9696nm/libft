@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hana/hmori <sagiri.mori@gmail.com>         +#+  +:+       +#+        */
+/*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:07:10 by hmori             #+#    #+#             */
-/*   Updated: 2025/02/20 21:38:45 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/07/08 18:32:43 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ void	ft_putbit(unsigned long int num, uint8_t bytesize);
 int		ft_isspace(int i);
 int		ft_isvalue(char *str);
 int		*ft_split_toi(char const *src, char c);
+
+int		perrturn(int status, char *msg);
 
 #endif

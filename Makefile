@@ -30,7 +30,7 @@ SRC_FILES		=	ft_isdigit.c ft_memset.c ft_strdup.c ft_strcmp.c ft_strncmp.c ft_at
 BONUS_SRC_FILES	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
 					ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c \
 
-EXTRA_SRC_FILES	=	get_next_line.c q_rsqrt.c \
+EXTRA_SRC_FILES	=	get_next_line.c q_rsqrt.c perrturn.c \
 
 ifeq ($(FLAG), extra)
 TARGET_SRC		=	$(SRC_FILES) $(BONUS_SRC_FILES) $(EXTRA_SRC_FILES)

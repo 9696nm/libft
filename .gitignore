@@ -6,6 +6,8 @@ objs
 
 *.a
 *.out
+*.log
 
 # --- add ---
-test*
+libft-test-tokyo
+libft-tester-azusa

@@ -6,7 +6,7 @@
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 16:07:10 by hmori             #+#    #+#             */
-/*   Updated: 2025/07/08 18:32:43 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/07/13 12:15:15 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdint.h>
 # include <stddef.h>
 # include <limits.h>
+# include <stdbool.h>
 # include <errno.h>
 
 typedef struct s_list
@@ -78,5 +79,6 @@ int		ft_isvalue(char *str);
 int		*ft_split_toi(char const *src, char c);
 
 int		perrturn(int status, char *msg);
+long	ft_strtol(const char *nptr, char **endptr, int base);
 
 #endif

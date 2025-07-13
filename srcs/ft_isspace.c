@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_isspace(int i)
+int	ft_isspace(int num)
 {
-	return (('\t' <= i && i <= '\r') || i == ' ');
+	return (('\t' <= num && num <= '\r') || num == ' ');
 }

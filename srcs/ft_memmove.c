@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stddef.h>
 
 static void	forword(unsigned char *ch_dest, unsigned char *ch_src, size_t n)
 {

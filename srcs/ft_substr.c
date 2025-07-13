@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stddef.h>
+#include <stdlib.h>
+
+#include "ft/string.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -33,21 +36,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		result[size] = ((unsigned char *)s)[start + size];
 	return ((char *)result);
 }
-
-/*
-s -> '\0'の場合は1枠確保して"\0" を返す
-s -> NULLの場合はNULLを返す 
-*/
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	char	ord[] = "0123456";
-// 	char	*res;
-
-// 	res = ft_substr("\0", 0, 11);
-// 	printf ("%s\n", res);
-// 	free (res);
-// 	return (0);
-// }

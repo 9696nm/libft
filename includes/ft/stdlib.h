@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_stdlib.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/15 13:06:01 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/03/15 13:06:02 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/07/13 12:33:33 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/07/13 14:54:11 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(const char *lhs, const char *rhs)
-{
-	while (*lhs && *rhs
-		&& (unsigned char)*lhs++ == (unsigned char)*rhs++)
-		continue ;
-	if ((unsigned char)*lhs < (unsigned char)*rhs)
-		return (-1);
-	if ((unsigned char)*lhs > (unsigned char)*rhs)
-		return (1);
-	return (0);
-}
+#pragma once
+
+#include <stddef.h> /* size_t */
+
+/* Original */
+int		ft_atoi(const char *str);
+void	*ft_calloc(size_t n, size_t size);
+
+long	ft_strtol(const char *nptr, char **endptr, int base);
+
+/* Non-standard */
+char	*ft_itoa(int n);

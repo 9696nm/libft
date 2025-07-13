@@ -10,14 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft/ctype.h"
 
 int	ft_isalnum(int num)
 {
 	return (ft_isdigit(num) || ft_isalpha(num));
 }
-
-/*returnについてはdigit参照*/
 
 // #include <stdio.h>
 // #include <ctype.h>

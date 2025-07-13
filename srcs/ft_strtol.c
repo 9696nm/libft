@@ -10,7 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <errno.h>
+#include <stdbool.h>
+#include <limits.h>
+
+#include "ft/ctype.h"
 
 static int	checkliteral(const char **str, int base)
 {

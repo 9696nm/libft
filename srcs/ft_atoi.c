@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <errno.h>
+#include <limits.h>
+
+#include "ft/ctype.h"
 
 static int	erange_turn(int i)
 {

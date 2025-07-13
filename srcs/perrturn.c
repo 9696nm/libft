@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include <errno.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
 
 int	perrturn(int status, char *msg)
 {

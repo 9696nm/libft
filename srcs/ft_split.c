@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stddef.h>
+#include <stdlib.h>
+
+#include "ft/string.h"
 
 static int	section_count(char *str, char c)
 {

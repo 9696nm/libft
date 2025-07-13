@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stddef.h>
+#include <stdlib.h>
+
+#include "ft/string.h"
 
 static int	check(unsigned char c, unsigned char *set)
 {

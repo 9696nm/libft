@@ -10,16 +10,22 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME			=	libft.a
+TARGET			=	libft.a
 PROJECT_NAME	=	Libft
 
-
-CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
-IFLAGS			=	-Iincludes
 MAKEFLAGS		+=	--no-print-directory 
 
-SRC_DIR			=	srcs/
+# -compile rule-
+CC				=	gcc
+WARNING_FLAG	=	-Wall -Wextra -Werror -Wshadow
+OPT_FLAGS		=	-O0
+INC_PATHS		=	-Iincludes
+DEPEND_FLAGS	=	-MMD -MP
+
+# -target-
+SRCS_DIR		=	srcs/
+OBJ_DIR			=	objs/
+
 SRC_FILES		=	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 					ft_memchr.c ft_memcmp.c \
 					ft_strlen.c ft_strchr.c ft_strrchr.c ft_strnstr.c ft_strcmp.c ft_strncmp.c \
@@ -39,6 +45,9 @@ BONUS_SRC_FILES	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lst
 EXTRA_SRC_FILES	=	get_next_line.c q_rsqrt.c perrturn.c
 # ft_strtol.c
 
+OBJ_FILES		=	$(patsubst %.c, $(OBJ_DIR)%.o, $(TARGET_SRC))
+DEPENDENCY		=	$(patsubst %.c, $(OBJ_DIR)%.d, $(TARGET_SRC))
+
 ifeq ($(FLAG), extra)
 TARGET_SRC		=	$(SRC_FILES) $(BONUS_SRC_FILES) $(EXTRA_SRC_FILES)
 else ifeq ($(FLAG), bonus)
@@ -47,10 +56,7 @@ else
 TARGET_SRC		=	$(SRC_FILES)
 endif
 
-OBJ_DIR			=	objs/
-OBJ_FILES		=	$(patsubst %.c, $(OBJ_DIR)%.o, $(TARGET_SRC))
-DEPENDENCY		=	$(patsubst %.c, $(OBJ_DIR)%.d, $(TARGET_SRC))
-
+# -color code-
 RED				=	"\033[1;31m"
 GREEN			= 	"\033[1;32m"
 YELLOW			=	"\033[1;33m"
@@ -58,20 +64,20 @@ CYAN			=	"\033[1;36m"
 WHITE			=	"\033[1;37m"
 RESET			=	"\033[0m"
 
+# --rule--
+-include $(DEPENDENCY)
 
-all: $(NAME)
+all: $(TARGET)
 
-$(NAME): $(OBJ_FILES)
+$(TARGET): $(OBJ_FILES)
 	ar rcs $@ $(OBJ_FILES)
 	@echo $(GREEN)"---$(PROJECT_NAME) Sccusse $(FLAG)!---"$(RESET)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(IFLAGS) -MMD -MP -c $< -o $@
-
--include $(DEPENDENCY)
+$(OBJ_DIR)%.o: $(SRCS_DIR)%.c | $(OBJ_DIR)
+	$(CC) $(WARNING_FLAG) $(OPT_FLAGS) $(INC_PATHS) $(DEPEND_FLAGS) -c $< -o $@
 
 bonus:
 	@$(MAKE) all FLAG=bonus
@@ -92,9 +98,9 @@ fclean:
 else
 fclean: clean
 endif
-	@if [ -f $(NAME) ]; then \
-		rm -f $(NAME); \
-		echo $(RED)"$(NAME) has been deleted !"$(RESET); \
+	@if [ -f $(TARGET) ]; then \
+		rm -f $(TARGET); \
+		echo $(RED)"$(TARGET) has been deleted !"$(RESET); \
 	else \
 		echo $(CYAN)"$(PROJECT_NAME) archive has already been deleted."$(RESET); \
 	fi

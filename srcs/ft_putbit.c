@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
+#include "ft/stdio.h"
 
 void	ft_putbit(unsigned long int num, uint8_t bytesize)
 {

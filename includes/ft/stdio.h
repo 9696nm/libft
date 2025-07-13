@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_stdlib.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/15 13:06:01 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/03/15 13:06:02 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/07/13 12:33:33 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/07/13 14:54:11 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(const char *lhs, const char *rhs)
-{
-	while (*lhs && *rhs
-		&& (unsigned char)*lhs++ == (unsigned char)*rhs++)
-		continue ;
-	if ((unsigned char)*lhs < (unsigned char)*rhs)
-		return (-1);
-	if ((unsigned char)*lhs > (unsigned char)*rhs)
-		return (1);
-	return (0);
-}
+#pragma once
+
+#include <stdint.h>
+
+/* Non-standard */
+void	ft_putchar_fd(char c, int fd);
+void	ft_putendl_fd(char *s, int fd);
+void	ft_putnbr_fd(int n, int fd);
+void	ft_putstr_fd(char *s, int fd);
+
+/* Extra */
+void	ft_putbit(unsigned long int num, uint8_t bytesize);

@@ -10,6 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/select.h>
+
 #include "get_next_line.h"
 
 static char	*g_memry[FD_MAX];

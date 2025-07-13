@@ -10,7 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stddef.h>
+#include <stdint.h>
+#include <stdlib.h>
+
+#include "ft/string.h"
 
 void	*ft_calloc(size_t n, size_t size)
 {

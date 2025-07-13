@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
+#include <stdio.h>
 
 int	perrturn(int status, char *msg)
 {

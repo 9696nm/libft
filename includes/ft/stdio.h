@@ -22,3 +22,4 @@ void	ft_putstr_fd(char *s, int fd);
 
 /* Extra */
 void	ft_putbit(unsigned long int num, uint8_t bytesize);
+int		perrturn(int status, char *msg);

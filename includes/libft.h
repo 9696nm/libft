@@ -16,7 +16,6 @@
 # include <stddef.h>
 
 # include "ft/ctype.h"
-# include "ft/errno.h"
 # include "ft/stdio.h"
 # include "ft/stdlib.h"
 # include "ft/string.h"

@@ -93,7 +93,8 @@ extra:
 
 math:
 	@git submodule update --init --remote --recursive
-	@-make -f $(LIBARITH_DIR)libarith.mk
+	@make -C $(LIBARITH_DIR)
+	@cp $(FTLIBM) ./
 
 clean:
 	@if [ -d $(LIBARITH_DIR) ] && [ -f $(LIBARITH_DIR)libarith.mk ]; then \
@@ -112,7 +113,7 @@ else
 fclean: clean
 endif
 	@if [ -d $(LIBARITH_DIR) ] && [ -f $(LIBARITH_DIR)libarith.mk ]; then \
-		$(MAKE) -f $(LIBARITH_DIR)libarith.mk fclean; \
+		$(MAKE) -f $(LIBARITH_DIR)libarith.mk fclean SKIP_CLEAN=1; \
 	fi
 	@if [ -f $(TARGET) ]; then \
 		rm -f $(TARGET); \

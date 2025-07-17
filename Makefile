@@ -76,7 +76,7 @@ RESET			=	"\033[0m"
 all: $(TARGET)
 
 $(TARGET): $(OBJ_FILES)
-	ar rcs $@ $(OBJ_FILES)
+	ar rcs $@ $^
 	@echo $(GREEN)"--- $(PROJECT_NAME) Compiling Sccusse $(COMPILE_TYPE)! ---"$(RESET)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR)

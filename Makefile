@@ -97,8 +97,8 @@ math:
 	@cp $(FTLIBM) ./
 
 clean:
-	@if [ -d $(LIBARITH_DIR) ] && [ -f $(LIBARITH_DIR)libarith.mk ]; then \
-		$(MAKE) -f $(LIBARITH_DIR)libarith.mk clean; \
+	@if [ -d $(LIBARITH_DIR) ] && [ -f $(LIBARITH_DIR)Makefile ]; then \
+		$(MAKE) -C $(LIBARITH_DIR) clean; \
 	fi
 	@if [ -d $(OBJS_DIR) ]; then \
 		rm -rf $(OBJS_DIR); \
@@ -112,8 +112,9 @@ fclean:
 else
 fclean: clean
 endif
-	@if [ -d $(LIBARITH_DIR) ] && [ -f $(LIBARITH_DIR)libarith.mk ]; then \
-		$(MAKE) -f $(LIBARITH_DIR)libarith.mk fclean SKIP_CLEAN=1; \
+	@if [ -d $(LIBARITH_DIR) ] && [ -f $(LIBARITH_DIR)Makefile ]; then \
+		$(MAKE) -C $(LIBARITH_DIR) fclean SKIP_CLEAN=1; \
+		rm -f ftlibm.a; \
 	fi
 	@if [ -f $(TARGET) ]; then \
 		rm -f $(TARGET); \

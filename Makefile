@@ -55,10 +55,10 @@ DEP_FILES		=	$(patsubst %.c, $(OBJS_DIR)%.d, $(TARGET_SRC))
 
 TARGET_SRC		=	$(SRCS)
 ifneq ($(filter bonus, $(COMPILE_TYPE)),)
-TARGET_SRC		+=	$(BONUS_SRCS)
+TARGET_SRC		=	$(BONUS_SRCS)
 endif
 ifneq ($(filter extra, $(COMPILE_TYPE)),)
-TARGET_SRC		+=	$(EXTRA_SRCS)
+TARGET_SRC		=	$(EXTRA_SRCS)
 endif
 
 # -color code-

@@ -11,14 +11,14 @@
 # **************************************************************************** #
 
 # Arithmetic Library Module
-ARITH_TARGET		=	ftlibm.a
+ARITH_TARGET		=	libarith.a
 ARITH_PROJECT_NAME	=	Libarith
 
 # -target dir-
 ARITH_DIR			=	libarith/
 ARITH_INC_DIR		=	$(ARITH_DIR)internal/
-ARITH_SRC_DIR		=	$(ARITH_DIR)srcs/
-ARITH_OBJ_DIR		=	$(OBJ_DIR)libarith/
+ARITH_SRC_DIR		=	$(ARITH_DIR)$(SRC_DIR)
+ARITH_OBJ_DIR		=	$(OBJ_DIR)$(ARITH_DIR)
 
 # -sources-
 ARITH_SRCS			=	q_rsqrt.c \

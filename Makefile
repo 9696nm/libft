@@ -16,7 +16,7 @@ PROJECT_NAME	=	Libft
 
 # -compile rule-
 CC				=	gcc
-WARNING_FLAGS	=	-Wall -Wextra -Werror -Wshadow
+WARNING_FLAGS	=	-Wall -Wextra -Werror -Wuninitialized
 INC_PATHS		=	$(addprefix -I,$(INC_DIR))
 OPT_FLAGS		=	-O0
 DEPEND_FLAGS	=	-MMD -MP

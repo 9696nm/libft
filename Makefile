@@ -10,10 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
+# FT Library
 TARGET			=	libft.a
 PROJECT_NAME	=	Libft
-
-MAKEFLAGS		+=	--no-print-directory
 
 # -compile rule-
 CC				=	gcc
@@ -62,6 +61,8 @@ DEPS			=	$(patsubst %.c, $(OBJ_DIR)%.d, $(TARGET_SRCS))
 # -include-
 -include $(DEPS)
 
+-include libarith/libarith.mk
+
 # -color code-
 RED				=	"\033[1;31m"
 GREEN			= 	"\033[1;32m"
@@ -89,8 +90,6 @@ bonus:
 extra:
 	@$(MAKE) all COMPILE_TYPE=extra
 
--include libarith/libarith.mk
-
 clean:
 	@if [ -d $(OBJ_DIR) ]; then \
 		rm -rf $(OBJ_DIR); \
@@ -113,7 +112,9 @@ endif
 
 re: fclean all
 
-# ---
-.DEFAULT_GOAL := all
+# -etc-
+MAKEFLAGS		+=	--no-print-directory
 
-.PHONY: all clean fclean re bonus $(LIBARITH_DIR)
+.DEFAULT_GOAL	:=	all
+
+.PHONY: all bonus extra clean fclean re

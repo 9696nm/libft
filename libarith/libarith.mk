@@ -55,7 +55,7 @@ arith_clean:
 		echo $(CYAN)"$(ARITH_PROJECT_NAME) archive has already been deleted."$(RESET); \
 	fi
 
-# ---
-CLEAN_TARGETS += arith_clean
+# -etc-
+CLEAN_TARGETS		+=	arith_clean
 
 .PHONY: arith arith_clean

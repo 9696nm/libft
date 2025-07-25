@@ -13,24 +13,24 @@
 TARGET			=	libft.a
 PROJECT_NAME	=	Libft
 
-MAKEFLAGS		+=	--no-print-directory 
+MAKEFLAGS		+=	--no-print-directory
 
 # -compile rule-
 CC				=	gcc
-WARNING_FLAG	=	-Wall -Wextra -Werror -Wshadow
+WARNING_FLAGS	=	-Wall -Wextra -Werror -Wshadow
+INC_PATHS		=	$(addprefix -I,$(INC_DIR))
 OPT_FLAGS		=	-O0
-INC_PATHS		=	-I$(INCLUDES_DIR)
 DEPEND_FLAGS	=	-MMD -MP
 
-# -library-
-LIBARITH_DIR	=	libarith/
-FTLIBM			=	$(LIBARITH_DIR)ftlibm.a
+AR				=	ar
+ARFLAGS			=	rcs
 
-# -target-
-INCLUDES_DIR	=	includes/
-SRCS_DIR		=	srcs/
-OBJS_DIR		=	objs/
+# -target dir-
+INC_DIR			=	./
+SRC_DIR			=	srcs/
+OBJ_DIR			=	objs/
 
+# -sources-
 SRCS			=	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 					ft_memchr.c ft_memcmp.c \
 					ft_strlen.c ft_strchr.c ft_strrchr.c ft_strnstr.c ft_strcmp.c ft_strncmp.c \
@@ -43,23 +43,24 @@ SRCS			=	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 					ft_calloc.c \
 					ft_atoi.c ft_itoa.c \
 					ft_putbit.c ft_isspace.c ft_isvalue.c ft_split_toi.c
-
 BONUS_SRCS		=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
 					ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+EXTRA_SRCS		=	get_next_line.c perrturn.c # ft_strtol.c
 
-EXTRA_SRCS		=	get_next_line.c perrturn.c
-# ft_strtol.c
-
-OBJ_FILES		=	$(patsubst %.c, $(OBJS_DIR)%.o, $(TARGET_SRC))
-DEP_FILES		=	$(patsubst %.c, $(OBJS_DIR)%.d, $(TARGET_SRC))
-
-TARGET_SRC		=	$(SRCS)
+TARGET_SRCS		=	$(SRCS)
 ifneq ($(filter bonus, $(COMPILE_TYPE)),)
-TARGET_SRC		=	$(BONUS_SRCS)
+TARGET_SRCS		=	$(BONUS_SRCS)
 endif
 ifneq ($(filter extra, $(COMPILE_TYPE)),)
-TARGET_SRC		=	$(EXTRA_SRCS)
+TARGET_SRCS		=	$(EXTRA_SRCS)
 endif
+
+# -objects-
+OBJS			=	$(patsubst %.c, $(OBJ_DIR)%.o, $(TARGET_SRCS))
+DEPS			=	$(patsubst %.c, $(OBJ_DIR)%.d, $(TARGET_SRCS))
+
+# -include-
+-include $(DEPS)
 
 # -color code-
 RED				=	"\033[1;31m"
@@ -69,21 +70,18 @@ CYAN			=	"\033[1;36m"
 WHITE			=	"\033[1;37m"
 RESET			=	"\033[0m"
 
-
 # --rule--
--include $(DEP_FILES)
-
 all: $(TARGET)
 
-$(TARGET): $(OBJ_FILES)
-	ar rcs $@ $^
-	@echo $(GREEN)"--- $(PROJECT_NAME) Compiling Sccusse $(COMPILE_TYPE)! ---"$(RESET)
+$(TARGET): $(OBJS)	
+	$(AR) $(ARFLAGS) $@ $^
+	@echo $(GREEN)"--- $(PROJECT_NAME) Compiling Success $(COMPILE_TYPE)! ---"$(RESET)
 
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR)
-	$(CC) $(WARNING_FLAG) $(OPT_FLAGS) $(INC_PATHS) $(DEPEND_FLAGS) -c $< -o $@
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
+	$(CC) $(WARNING_FLAGS) $(OPT_FLAGS) $(INC_PATHS) $(DEPEND_FLAGS) -c $< -o $@
 
-$(OBJS_DIR):
-	@mkdir -p $(OBJS_DIR)
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
 bonus:
 	@$(MAKE) all COMPILE_TYPE=bonus
@@ -91,31 +89,21 @@ bonus:
 extra:
 	@$(MAKE) all COMPILE_TYPE=extra
 
-math:
-	@git submodule update --init --remote --recursive
-	@make -C $(LIBARITH_DIR)
-	@cp $(FTLIBM) ./
+-include libarith/libarith.mk
 
 clean:
-	@if [ -d $(LIBARITH_DIR) ] && [ -f $(LIBARITH_DIR)Makefile ]; then \
-		$(MAKE) -C $(LIBARITH_DIR) clean; \
-	fi
-	@if [ -d $(OBJS_DIR) ]; then \
-		rm -rf $(OBJS_DIR); \
-		echo $(RED)"$(PROJECT_NAME) $(OBJS_DIR) has been deleted !"$(RESET); \
+	@if [ -d $(OBJ_DIR) ]; then \
+		rm -rf $(OBJ_DIR); \
+		echo $(RED)"$(PROJECT_NAME) $(OBJ_DIR) has been deleted !"$(RESET); \
 	else \
 		echo $(CYAN)"$(PROJECT_NAME) object has already been deleted."$(RESET); \
 	fi
 
 ifeq ($(SKIP_CLEAN), 1)
-fclean:
+fclean: $(CLEAN_TARGETS)
 else
-fclean: clean
+fclean: clean $(CLEAN_TARGETS)
 endif
-	@if [ -d $(LIBARITH_DIR) ] && [ -f $(LIBARITH_DIR)Makefile ]; then \
-		$(MAKE) -C $(LIBARITH_DIR) fclean SKIP_CLEAN=1; \
-		rm -f ftlibm.a; \
-	fi
 	@if [ -f $(TARGET) ]; then \
 		rm -f $(TARGET); \
 		echo $(RED)"$(TARGET) has been deleted !"$(RESET); \
@@ -125,6 +113,7 @@ endif
 
 re: fclean all
 
+# ---
 .DEFAULT_GOAL := all
 
 .PHONY: all clean fclean re bonus $(LIBARITH_DIR)

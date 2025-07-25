@@ -14,6 +14,11 @@
 TARGET			=	libft.a
 PROJECT_NAME	=	Libft
 
+MAKEFLAGS		+=	--no-print-directory
+
+.DEFAULT_GOAL	:=	all
+
+
 # -compile rule-
 CC				=	gcc
 WARNING_FLAGS	=	-Wall -Wextra -Werror -Wuninitialized
@@ -48,7 +53,7 @@ EXTRA_SRCS		=	get_next_line.c perrturn.c # ft_strtol.c
 
 TARGET_SRCS		=	$(SRCS)
 ifneq ($(filter bonus, $(COMPILE_TYPE)),)
-TARGET_SRCS		=	$(BONUS_SRCS)
+TARGET_SRCS		+=	$(BONUS_SRCS)
 endif
 ifneq ($(filter extra, $(COMPILE_TYPE)),)
 TARGET_SRCS		=	$(EXTRA_SRCS)
@@ -70,6 +75,7 @@ YELLOW			=	"\033[1;33m"
 CYAN			=	"\033[1;36m"
 WHITE			=	"\033[1;37m"
 RESET			=	"\033[0m"
+
 
 # --rule--
 all: $(TARGET)
@@ -105,16 +111,11 @@ fclean: clean $(CLEAN_TARGETS)
 endif
 	@if [ -f $(TARGET) ]; then \
 		rm -f $(TARGET); \
-		echo $(RED)"$(TARGET) has been deleted !"$(RESET); \
+		echo $(RED)"$(PROJECT_NAME) $(TARGET) has been deleted !"$(RESET); \
 	else \
 		echo $(CYAN)"$(PROJECT_NAME) archive has already been deleted."$(RESET); \
 	fi
 
 re: fclean all
-
-# -etc-
-MAKEFLAGS		+=	--no-print-directory
-
-.DEFAULT_GOAL	:=	all
 
 .PHONY: all bonus extra clean fclean re

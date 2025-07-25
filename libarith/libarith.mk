@@ -14,6 +14,9 @@
 ARITH_TARGET		=	libarith.a
 ARITH_PROJECT_NAME	=	Libarith
 
+CLEAN_TARGETS		+=	arith_clean
+
+
 # -target dir-
 ARITH_DIR			=	libarith/
 ARITH_INC_DIR		=	$(ARITH_DIR)internal/
@@ -34,6 +37,7 @@ INC_DIR				+=	$(ARITH_INC_DIR)
 # -include-
 -include $(ARITH_DEPS)
 
+
 # -rule-
 arith: $(ARITH_TARGET)
 
@@ -50,12 +54,9 @@ $(ARITH_OBJ_DIR):
 arith_clean:
 	@if [ -f $(ARITH_TARGET) ]; then \
 		rm -f $(ARITH_TARGET); \
-		echo $(RED)"$(ARITH_TARGET) has been deleted !"$(RESET); \
+		echo $(RED)"$(ARITH_PROJECT_NAME) $(ARITH_TARGET) has been deleted !"$(RESET); \
 	else \
 		echo $(CYAN)"$(ARITH_PROJECT_NAME) archive has already been deleted."$(RESET); \
 	fi
-
-# -etc-
-CLEAN_TARGETS		+=	arith_clean
 
 .PHONY: arith arith_clean

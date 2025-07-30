@@ -13,7 +13,7 @@
 #ifndef Q_RSQRT_H
 # define Q_RSQRT_H
 
-typedef union	u_cast
+typedef union u_cast
 {
 	long int	li;
 	float		f;

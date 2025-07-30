@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ret_errmsg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/15 13:06:01 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/03/15 13:06:02 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/07/26 13:40:37 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/07/26 13:40:38 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(const char *lhs, const char *rhs)
+#include <unistd.h>
+
+#include "ft/stdio.h"
+
+int	ret_errmsg(int code, const char *msg)
 {
-	while (*lhs && *rhs
-		&& (unsigned char)*lhs == (unsigned char)*rhs)
-	{
-		lhs++;
-		rhs++;
-	}
-	return ((unsigned char)*lhs - (unsigned char)*rhs);
+	ft_putstr_fd((char *)msg, STDERR_FILENO);
+	return (code);
 }
+
+// ft_fdの引数constにしろ!!!

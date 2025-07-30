@@ -49,7 +49,7 @@ SRCS			=	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 					ft_putbit.c ft_isspace.c ft_isvalue.c ft_split_toi.c
 BONUS_SRCS		=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
 					ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
-EXTRA_SRCS		=	get_next_line.c perrturn.c # ft_strtol.c
+EXTRA_SRCS		=	get_next_line.c perrturn.c ret_errmsg.c # ft_strtol.c
 
 TARGET_SRCS		=	$(SRCS)
 ifneq ($(filter bonus, $(COMPILE_TYPE)),)
@@ -82,7 +82,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS)	
 	$(AR) $(ARFLAGS) $@ $^
-	@echo $(GREEN)"--- $(PROJECT_NAME) Compiling Success $(COMPILE_TYPE)! ---"$(RESET)
+	@echo $(GREEN)"--- $(PROJECT_NAME) compiled successfully $(COMPILE_TYPE) ---"$(RESET)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(CC) $(WARNING_FLAGS) $(OPT_FLAGS) $(INC_PATHS) $(DEPEND_FLAGS) -c $< -o $@

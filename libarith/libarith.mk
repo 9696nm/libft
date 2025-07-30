@@ -43,7 +43,7 @@ arith: $(ARITH_TARGET)
 
 $(ARITH_TARGET): $(ARITH_OBJS)
 	$(AR) $(ARFLAGS) $@ $^
-	@echo $(GREEN)"$(ARITH_PROJECT_NAME) has been compiled !"$(RESET)
+	@echo $(GREEN)"--- $(ARITH_PROJECT_NAME) compiled successfully ---"$(RESET)
 
 $(ARITH_OBJ_DIR)%.o: $(ARITH_SRC_DIR)%.c | $(ARITH_OBJ_DIR)
 	$(CC) $(WARNING_FLAG) $(OPT_FLAGS) $(INC_PATHS) $(DEPEND_FLAGS) -c $< -o $@

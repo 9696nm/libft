@@ -29,7 +29,7 @@ typedef struct s_quaternion
 	t_vec3	v;
 }	t_quater;
 
-/* quaternion.c */ 
+/* quaternion.c */
 t_quater	quater_normalize(t_quater q);
 t_quater	quater_multiply(t_quater q1, t_quater q2);
 t_quater	quater_conjugate(const t_quater q);

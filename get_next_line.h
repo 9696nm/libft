@@ -34,12 +34,12 @@
 #  define BUFFER_SIZE 65536
 # endif
 
-typedef struct s_mem
+typedef struct s_gnl_buffer
 {
 	ssize_t	read_len;
 	char	*result;
 	char	pull[BUFFER_SIZE + 1];
-}	t_mem;
+}	t_gnl_buf;
 
 char	*get_next_line(int fd);
 

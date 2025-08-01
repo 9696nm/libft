@@ -49,11 +49,11 @@ static t_gnl_node	*resbuf_add(t_gnl_buf buf)
 	return (new);
 }
 
-static void	resbuf_remove(char *result, ssize_t len, t_gnl_node *node)
+static void	resbuf_remove(ssize_t len, char *result, t_gnl_node *node)
 {
 	if (node == NULL)
 		return ;
-	resbuf_remove(result, len, node->next);
+	resbuf_remove(len, result, node->next);
 	if (result)
 		ft_strlcat(result, node->element, len + 1);
 	free(node);
@@ -75,7 +75,7 @@ static char	*resbuf_cat(t_gnl_node *node)
 	}
 	if (len)
 		result = ft_calloc(sizeof(char), (len + 1));
-	resbuf_remove(result, len, node);
+	resbuf_remove(len, result, node);
 	return (result);
 }
 
@@ -104,7 +104,7 @@ char	*get_next_line(int fd)
 		if (ft_strchr(buf.res->element, '\n') || buf.rlen == 0)
 			return (resbuf_cat(buf.res));
 	}
-	resbuf_remove(NULL, 0, buf.res);
+	resbuf_remove(0, NULL, buf.res);
 	return (NULL);
 }
 

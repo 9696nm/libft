@@ -79,7 +79,6 @@ static char	*resbuf_cat(t_gnl_node *node)
 	return (result);
 }
 
-
 char	*get_next_line(int fd)
 {
 	static char	*memrys[FD_MAX];

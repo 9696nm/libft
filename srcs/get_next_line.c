@@ -15,32 +15,10 @@
 #include <stdlib.h>
 #include <sys/select.h>
 
+#include "ft/stdlib.h"
+#include "ft/string.h"
 #include "get_next_line.h"
 
-static char	*na_strchr(const char *source, int c)
-{
-	while (*source)
-	{
-		if (*source == (unsigned char)c)
-			return ((char *)source);
-		source++;
-	}
-	return ((char *)source);
-}
-
-static char	*rescopy(t_mem lst, char **oldres)
-{
-	char	*joint;
-
-	joint = ft_strchr(lst.pull, '\n');
-	if (joint)
-		lst.pull[joint - lst.pull + 1] = '\0';
-	joint = ft_strjoin(*oldres, lst.pull);
-	free(*oldres);
-	return (joint);
-}
-
-#include <stdio.h>
 static int	memry_alloc(char **memry)
 {
 	char	*str;
@@ -56,31 +34,78 @@ static int	memry_alloc(char **memry)
 	return (true);
 }
 
+static t_gnl_node	*resbuf_add(t_gnl_buf buf)
+{
+	t_gnl_node	*new;
+	char		*trimmed;
+
+	new = malloc(sizeof(t_gnl_node));
+	new->next = buf.res;
+	trimmed = ft_strchr(buf.pull, '\n');
+	if (trimmed)
+		ft_strlcpy(new->element, buf.pull, trimmed - buf.pull + 2);
+	else
+		ft_strlcpy(new->element, buf.pull, BUFFER_SIZE + 1);
+	return (new);
+}
+
+static void	resbuf_remove(char *result, ssize_t len, t_gnl_node *node)
+{
+	if (node == NULL)
+		return ;
+	resbuf_remove(result, len, node->next);
+	if (result)
+		ft_strlcat(result, node->element, len + 1);
+	free(node);
+}
+
+static char	*resbuf_cat(t_gnl_node *node)
+{
+	t_gnl_node	*tmp;
+	ssize_t		len;
+	char		*result;
+
+	tmp = node;
+	len = 0;
+	result = NULL;
+	while (tmp)
+	{
+		len += ft_strlen(tmp->element);
+		tmp = tmp->next;
+	}
+	if (len)
+		result = ft_calloc(sizeof(char), (len + 1));
+	resbuf_remove(result, len, node);
+	return (result);
+}
+
+
 char	*get_next_line(int fd)
 {
 	static char	*memrys[FD_MAX];
-	t_gnl_buf	lst;
+	t_gnl_buf	buf;
 
-	// lst.result = malloc(sizeof(char));
-	// *lst.result = '\0';
-	lst.result = NULL;
-	lst.read_len = BUFFER_SIZE;
-	while (lst.read_len && 0 <= fd && fd < FD_MAX && memry_alloc(&memrys[fd]))
+	buf.res = NULL;
+	while (0 <= fd && fd < FD_MAX && memry_alloc(&memrys[fd]))
 	{
-		ft_bzero(lst.pull, BUFFER_SIZE + 1);
+		ft_bzero(buf.pull, BUFFER_SIZE + 1);
 		if (*memrys[fd] == '\0')
-			lst.read_len = read(fd, lst.pull, BUFFER_SIZE);
+			buf.rlen = read(fd, buf.pull, BUFFER_SIZE);
 		else
-			ft_strlcpy(lst.pull, memrys[fd] + 1, ft_strlen(memrys[fd]) + 1);
-		if (lst.read_len < 0 || lst.pull == NULL)
+			buf.rlen = ft_strlcpy(buf.pull, memrys[fd], BUFFER_SIZE + 1);
+		if (BUFFER_SIZE == 0 || buf.rlen < 0)
 			break ;
-		ft_strlcpy(memrys[fd], na_strchr(lst.pull, '\n'), lst.read_len + 1);
-		lst.result = rescopy(lst, &(lst.result));
-		if (*memrys[fd] == '\n' || (*lst.result && lst.read_len == 0))
-			return (lst.result);
+		if (ft_strchr(buf.pull, '\n'))
+			ft_strlcpy(memrys[fd], ft_strchr(buf.pull, '\n') + 1, buf.rlen + 1);
+		else
+			ft_bzero(memrys[fd], BUFFER_SIZE + 1);
+		buf.res = resbuf_add(buf);
+		if (buf.res == NULL)
+			return (NULL);
+		if (ft_strchr(buf.res->element, '\n') || buf.rlen == 0)
+			return (resbuf_cat(buf.res));
 	}
-	if (lst.result)
-		free(lst.result);
+	resbuf_remove(NULL, 0, buf.res);
 	return (NULL);
 }
 
@@ -97,20 +122,24 @@ char	*get_next_line(int fd)
 // 	}
 // }
 
-#include <stdio.h>
-#include <fcntl.h>
-int	main (int argc, char *argv[])
-{
-	char	*str;
+// #include <stdio.h>
+// #include <fcntl.h>
+// int	main (int argc, char *argv[])
+// {
+// 	char	*str;
 
-	if (argc != 2)
-		return (0);
-	int	fd = open(argv[1], O_RDONLY);
-	while (str = get_next_line(fd), str)
-		printf("%s", str);
-		// continue ;
-	printf("%d\n", BUFFER_SIZE);
-	free(str);
-	close(fd);
-	return (0);
-}
+// 	if (argc != 2)
+// 		return (0);
+// 	int	fd = open(argv[1], O_RDONLY);
+// 	if (fd == -1)
+// 		return (0);
+// 	while (str = get_next_line(fd), str)
+// 	{
+// 		printf("%s", str);
+// 		fflush(stdout);
+// 		free(str);
+// 	}
+// 	// printf("BUFFER_SIZE=%d\n", BUFFER_SIZE);
+// 	close(fd);
+// 	return (0);
+// }

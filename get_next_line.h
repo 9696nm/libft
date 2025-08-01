@@ -15,8 +15,6 @@
 
 # include <stddef.h>
 
-# include "libft.h"
-
 # ifndef FD_MAX
 #  define FD_MAX FD_SETSIZE
 # endif
@@ -34,11 +32,17 @@
 #  define BUFFER_SIZE 65536
 # endif
 
+typedef struct s_gnl_node
+{
+	void	*next;
+	char	element[BUFFER_SIZE];
+}	t_gnl_node;
+
 typedef struct s_gnl_buffer
 {
-	ssize_t	read_len;
-	char	*result;
-	char	pull[BUFFER_SIZE + 1];
+	ssize_t		rlen;
+	char		pull[BUFFER_SIZE + 1];
+	t_gnl_node	*res;
 }	t_gnl_buf;
 
 char	*get_next_line(int fd);

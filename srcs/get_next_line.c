@@ -34,21 +34,6 @@ static int	memry_alloc(char **memry)
 	return (true);
 }
 
-static t_gnl_node	*resbuf_add(t_gnl_buf buf)
-{
-	t_gnl_node	*new;
-	char		*trimmed;
-
-	new = malloc(sizeof(t_gnl_node));
-	new->next = buf.res;
-	trimmed = ft_strchr(buf.pull, '\n');
-	if (trimmed)
-		ft_strlcpy(new->element, buf.pull, trimmed - buf.pull + 2);
-	else
-		ft_strlcpy(new->element, buf.pull, BUFFER_SIZE + 1);
-	return (new);
-}
-
 static void	resbuf_remove(ssize_t len, char *result, t_gnl_node *node)
 {
 	if (node == NULL)
@@ -57,6 +42,26 @@ static void	resbuf_remove(ssize_t len, char *result, t_gnl_node *node)
 	if (result)
 		ft_strlcat(result, node->element, len + 1);
 	free(node);
+}
+
+static t_gnl_node	*resbuf_add(t_gnl_buf buf)
+{
+	t_gnl_node	*new;
+	char		*trimmed;
+
+	new = malloc(sizeof(t_gnl_node));
+	if (new)
+	{
+		new->next = buf.res;
+		trimmed = ft_strchr(buf.pull, '\n');
+		if (trimmed)
+			ft_strlcpy(new->element, buf.pull, trimmed - buf.pull + 2);
+		else
+			ft_strlcpy(new->element, buf.pull, BUFFER_SIZE + 1);
+	}
+	else
+		resbuf_remove(0, NULL, buf.res);
+	return (new);
 }
 
 static char	*resbuf_cat(t_gnl_node *node)
@@ -108,15 +113,15 @@ char	*get_next_line(int fd)
 	return (NULL);
 }
 
-// __attribute__((destructor)) static void	global_free(void)
+// __attribute__((destructor)) static void	gnl_global_free(void)
 // {
 // 	int	fd;
 
 // 	fd = 0;
 // 	while (fd <= FD_MAX)
 // 	{
-// 		if (memrys[fd])
-// 			free(memrys[fd]);
+// 		if (gnl_memrys[fd])
+// 			free(gnl_memrys[fd]);
 // 		fd++;
 // 	}
 // }

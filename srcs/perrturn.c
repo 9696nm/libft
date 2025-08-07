@@ -18,4 +18,3 @@ int	perrturn(int status, char *msg)
 		perror(msg);
 	return (status);
 }
-// dprintf?

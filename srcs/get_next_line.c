@@ -84,25 +84,26 @@ static char	*resbuf_cat(t_gnl_node *node)
 	return (result);
 }
 
+static char	*gnl_memrys[FD_MAX];
+
 char	*get_next_line(int fd)
 {
-	static char	*memrys[FD_MAX];
 	t_gnl_buf	buf;
 
 	buf.res = NULL;
-	while (0 <= fd && fd < FD_MAX && memry_alloc(&memrys[fd]))
+	while (0 <= fd && fd < FD_MAX && memry_alloc(&gnl_memrys[fd]))
 	{
 		ft_bzero(buf.pull, BUFFER_SIZE + 1);
-		if (*memrys[fd] == '\0')
+		if (*gnl_memrys[fd] == '\0')
 			buf.rlen = read(fd, buf.pull, BUFFER_SIZE);
 		else
-			buf.rlen = ft_strlcpy(buf.pull, memrys[fd], BUFFER_SIZE + 1);
+			buf.rlen = ft_strlcpy(buf.pull, gnl_memrys[fd], BUFFER_SIZE + 1);
 		if (BUFFER_SIZE == 0 || buf.rlen < 0)
 			break ;
 		if (ft_strchr(buf.pull, '\n'))
-			ft_strlcpy(memrys[fd], ft_strchr(buf.pull, '\n') + 1, buf.rlen + 1);
+			ft_strlcpy(gnl_memrys[fd], ft_strchr(buf.pull, '\n') + 1, buf.rlen + 1);
 		else
-			ft_bzero(memrys[fd], BUFFER_SIZE + 1);
+			ft_bzero(gnl_memrys[fd], BUFFER_SIZE + 1);
 		buf.res = resbuf_add(buf);
 		if (buf.res == NULL)
 			return (NULL);
@@ -113,18 +114,18 @@ char	*get_next_line(int fd)
 	return (NULL);
 }
 
-// __attribute__((destructor)) static void	gnl_global_free(void)
-// {
-// 	int	fd;
+__attribute__((destructor)) static void	gnl_global_free(void)
+{
+	int	fd;
 
-// 	fd = 0;
-// 	while (fd <= FD_MAX)
-// 	{
-// 		if (gnl_memrys[fd])
-// 			free(gnl_memrys[fd]);
-// 		fd++;
-// 	}
-// }
+	fd = 0;
+	while (fd <= FD_MAX)
+	{
+		if (gnl_memrys[fd])
+			free(gnl_memrys[fd]);
+		fd++;
+	}
+}
 
 // #include <stdio.h>
 // #include <fcntl.h>

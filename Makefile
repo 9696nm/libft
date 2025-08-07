@@ -36,6 +36,7 @@ OBJ_DIR			=	objs/
 
 # -sources-
 SRCS			=	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
+					ft_islower.c ft_isupper.c \
 					ft_memchr.c ft_memcmp.c \
 					ft_strlen.c ft_strchr.c ft_strrchr.c ft_strnstr.c ft_strcmp.c ft_strncmp.c \
 					ft_memset.c ft_memcpy.c ft_memmove.c \

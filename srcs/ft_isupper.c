@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ctype.h                                            :+:      :+:    :+:   */
+/*   ft_isupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/13 12:33:33 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/07/26 13:41:55 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/08/02 18:58:20 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/08/02 18:58:21 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+int ft_isupper(int c)
+{
+	return ('A' <= c && c <= 'Z');
+}
 
-/* Original */
-int	ft_isalnum(int c);
-int	ft_isalpha(int c);
-int	ft_isdigit(int c);
-int	ft_islower(int c);
-int	ft_isprint(int c);
-int	ft_isspace(int c);
-int	ft_isupper(int c);
+// #include <ctype.h>
+// #include <stdio.h>
+// #include <limits.h>
+// #include "libft.h"
+// int	main(void)
+// {
+// 	int	c;
 
-int	ft_isascii(int c);
-
-int	ft_tolower(int c);
-int	ft_toupper(int c);
-
-/* Extra */
-int	ft_isvalue(char *str);
+// 	c = -2;
+// 	while(c < UCHAR_MAX)
+// 	{
+// 		printf("%d : %c : %d\n", c, c, isupper(c));
+// 		if (isupper(c))
+// 		{
+// 			ft_putbit(c, 4);
+// 			ft_putchar_fd('\n', 1);
+// 		}
+// 		c++;
+// 	}
+// 	return (0);
+// }

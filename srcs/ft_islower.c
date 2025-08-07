@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ctype.h                                            :+:      :+:    :+:   */
+/*   ft_islower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/13 12:33:33 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/07/26 13:41:55 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/08/02 18:58:10 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/08/02 18:58:11 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+int ft_islower(int c)
+{
+	return ('a' <= c && c <= 'z');
+}
 
-/* Original */
-int	ft_isalnum(int c);
-int	ft_isalpha(int c);
-int	ft_isdigit(int c);
-int	ft_islower(int c);
-int	ft_isprint(int c);
-int	ft_isspace(int c);
-int	ft_isupper(int c);
+// #include <ctype.h>
+// #include <stdio.h>
+// #include <limits.h>
+// #include "libft.h"
 
-int	ft_isascii(int c);
+// int	main(void)
+// {
+// 	char	c;
 
-int	ft_tolower(int c);
-int	ft_toupper(int c);
-
-/* Extra */
-int	ft_isvalue(char *str);
+// 	c = 0;
+// 	while(c < CHAR_MAX)
+// 	{
+// 		printf("%c : %d\n", c, islower(c));
+// 		if (islower(c))
+// 		{
+// 			ft_putbit(c, 1);
+// 			ft_putchar_fd('\n', 0);
+// 		}
+// 		c++;
+// 	}
+// 	return (0);
+// }

@@ -12,6 +12,7 @@
 
 #pragma once
 
+#include <stddef.h>
 #include <stdint.h>
 
 /* Non-standard */
@@ -22,5 +23,6 @@ void	ft_putstr_fd(char *s, int fd);
 
 /* Extra */
 void	ft_putbit(unsigned long int num, uint8_t bytesize);
+void	print_bits(const void *ptr, size_t byte);
 int		perrturn(int status, char *msg);
 int		ret_errmsg(int code, const char *msg);

@@ -40,14 +40,18 @@ static int	checkliteral(const char **str, int base)
 	return (base);
 }
 
-static int	isbasedigit(int c, int base)
+static int	isbasedigit(char c, int base)
 {
-	if ('0' <= c && c <= ('0' + base - 1) && c <= '9')
-		return (c - '0');
-	if ('a' <= c && c <= ('a' + base - 11))
-		return (c - 'a' + 10);
-	if ('A' <= c && c <= ('A' + base - 11))
-		return (c - 'A' + 10);
+	int	up;
+
+	up = ft_toupper(c);
+	if (0 < base)
+	{
+		if (base <= 10 && '0' <= up && up <= ('0' + base - 1))
+			return (up - '0');
+		if (base <= 26 && 'A' <= up && up <= ('A' + base - 11))
+			return (up - 'A' + 10);
+	}
 	return (-1);
 }
 

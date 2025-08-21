@@ -15,21 +15,19 @@
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t			i;
-	unsigned char	*c1;
-	unsigned char	*c2;
+	unsigned char	c1;
+	unsigned char	c2;
 
-	c1 = (unsigned char *)s1;
-	c2 = (unsigned char *)s2;
 	i = 0;
-	if (n == 0)
-		return (0);
-	while (c1[i] && c2[i])
+	while (i < n && (s1[i] || s2[i]))
 	{
-		if (c1[i] - c2[i] || !(i + 1 < n))
-			break ;
+		c1 = (unsigned char)s1[i];
+		c2 = (unsigned char)s2[i];
+		if (c1 - c2)
+			return (c1 - c2);
 		i++;
 	}
-	return (c1[i] - c2[i]);
+	return (0);
 }
 
 // #include <stdio.h>
@@ -37,10 +35,12 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 // int	main(void)
 // {
-// 	size_t	any_cmp = 50;
-// 	char	*s1 = "0123", *s2 = "0124";
+// 	size_t	any_cmp = 1000000;
+// 	char	*s1 = "a3", *s2 = "a3";
 
-// 	printf("s1 : %s\ns2 : %s\nord_diff : %d\nft__diff : %d\n",
-//  s1, s2, strncmp(s1, s2, any_cmp), ft_strncmp(s1, s2, any_cmp));
+// 	printf("len : %zu\ns1  : %s\ns2  : %s\n", any_cmp, s1, s2);
+// 	printf("org : %i\n", strncmp(s1, s2, any_cmp));
+// 	fflush(stdout);
+// 	printf("ft_ : %i\n", ft_strncmp(s1, s2, any_cmp));
 // 	return (0);
 // }

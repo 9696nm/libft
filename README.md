@@ -51,6 +51,8 @@ Then include the header in your C files:
 
 The library contains various utility functions organized into three categories:
 
+**📖 For detailed function reference, see [function_list.md](function_list.md)**
+
 1. **Standard Functions** (default build)
    - Character checks (`ft_isalnum`, `ft_isalpha`, etc.)
    - Memory operations (`ft_memchr`, `ft_memcmp`, etc.)

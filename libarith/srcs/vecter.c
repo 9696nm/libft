@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   q_rsqrt.h                                          :+:      :+:    :+:   */
+/*   vecter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 15:26:34 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/07/14 22:01:58 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/01/30 12:57:13 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/07/14 22:21:46 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef Q_RSQRT_H
-# define Q_RSQRT_H
+#include "vecter.h"
 
-# include <math.h>
-
-typedef union u_cast
+t_vec3	vecter_normalize(t_vec3 v)
 {
-	long int	li;
-	float		f;
-}	t_cast;
+	float	norm;
 
-float	q_rsqrtf(float number);
-
-#endif /* Q_RSQRT_H */
+	norm = q_rsqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
+	v.x *= norm;
+	v.y *= norm;
+	v.z *= norm;
+	return (v);
+}

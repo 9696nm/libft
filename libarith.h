@@ -43,4 +43,7 @@ t_quater	quater_conjugate(const t_quater q);
 t_quater	quater_rotate(t_quater qv, t_quater q);
 t_quater	quater_axis_angle(float x, float y, float z, float angle);
 
+/* vecter.c */
+t_vec3		vecter_normalize(t_vec3 v);
+
 #endif /* LIBARITH_H */

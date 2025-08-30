@@ -13,7 +13,7 @@
 #include "quaternion.h"
 
 // Normalisation of quaternions
-t_quater	quater_normalize(t_quater q)
+t_quat	quat_normalize(t_quat q)
 {
 	float	norm;
 
@@ -26,9 +26,9 @@ t_quater	quater_normalize(t_quater q)
 }
 
 // Product of quaternions
-t_quater	quater_multiply(t_quater q1, t_quater q2)
+t_quat	quat_multiply(t_quat q1, t_quat q2)
 {
-	t_quater	result;
+	t_quat	result;
 	t_vec3		v1;
 	t_vec3		v2;
 
@@ -42,9 +42,9 @@ t_quater	quater_multiply(t_quater q1, t_quater q2)
 }
 
 // Set up conjugate quaternions.
-t_quater	quater_conjugate(const t_quater q)
+t_quat	quat_conjugate(const t_quat q)
 {
-	t_quater	q_conj;
+	t_quat	q_conj;
 
 	q_conj.w = q.w;
 	q_conj.v.x = -q.v.x;
@@ -54,24 +54,24 @@ t_quater	quater_conjugate(const t_quater q)
 }
 
 // Rotation of 3D vectors by quaternions
-t_quater	quater_rotate(t_quater qv, t_quater p)
+t_quat	quat_rotate(t_quat qv, t_quat p)
 {
-	t_quater	q_conj;
-	t_quater	result;
+	t_quat	q_conj;
+	t_quat	result;
 
-	q_conj = quater_conjugate(qv);
-	result = quater_multiply(quater_multiply(qv, p), q_conj);
+	q_conj = quat_conjugate(qv);
+	result = quat_multiply(quat_multiply(qv, p), q_conj);
 	return (result);
 }
 
 // Quaternions from axes and angles.
-t_quater	quater_axis_angle(float x, float y, float z, float angle)
+t_quat	quat_axis_angle(float x, float y, float z, float angle)
 {
 	float		half_angle;
 	float		s;
-	t_quater	q;
+	t_quat	q;
 
-	half_angle = angle / 2.0f;
+	half_angle = angle * 0.5f;
 	s = sinf(half_angle);
 	q.w = cosf(half_angle);
 	q.v.x = x * s;

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vecter.h                                           :+:      :+:    :+:   */
+/*   vecter3.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -23,6 +23,6 @@ typedef struct s_vecter3
 }	t_vec3;
 
 /* vecter.c */
-t_vec3	vecter_normalize(t_vec3 v);
+t_vec3	vecter3_normalize(t_vec3 v);
 
 #endif /* VECTER_H */

@@ -26,7 +26,7 @@ ARITH_OBJ_DIR		=	$(OBJ_DIR)$(ARITH_DIR)
 # -sources-
 ARITH_SRCS			=	q_rsqrt.c \
 						quaternion.c \
-						vecter.c \
+						vecter3.c \
 
 # -objects-
 ARITH_OBJS			=	$(patsubst %.c, $(ARITH_OBJ_DIR)%.o, $(ARITH_SRCS))

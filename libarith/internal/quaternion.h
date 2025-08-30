@@ -27,13 +27,13 @@ typedef struct s_quaternion
 {
 	float	w;
 	t_vec3	v;
-}	t_quater;
+}	t_quat;
 
 /* quaternion.c */
-t_quater	quater_normalize(t_quater q);
-t_quater	quater_multiply(t_quater q1, t_quater q2);
-t_quater	quater_conjugate(const t_quater q);
-t_quater	quater_rotate(t_quater qv, t_quater q);
-t_quater	quater_axis_angle(float x, float y, float z, float angle);
+t_quat	quat_normalize(t_quat q);
+t_quat	quat_multiply(t_quat q1, t_quat q2);
+t_quat	quat_conjugate(const t_quat q);
+t_quat	quat_rotate(t_quat qv, t_quat q);
+t_quat	quat_axis_angle(float x, float y, float z, float angle);
 
 #endif /* QUATERNION_H */

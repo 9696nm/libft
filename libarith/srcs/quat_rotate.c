@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vecter3.c                                          :+:      :+:    :+:   */
+/*   quat_rotate.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vecter3.h"
+#include "quaternion.h"
 
-t_vec3	vecter3_normalize(t_vec3 v)
+// Rotation of 3D vectors by quaternions.
+t_quat	quat_rotate(t_quat src, t_quat rot)
 {
-	float	norm;
+	t_quat	q_conj;
+	t_quat	result;
 
-	norm = q_rsqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
-	v.x *= norm;
-	v.y *= norm;
-	v.z *= norm;
-	return (v);
+	q_conj = quat_conjugate(rot);
+	result = quat_multiply(quat_multiply(q_conj, src), rot);
+	return (result);
 }

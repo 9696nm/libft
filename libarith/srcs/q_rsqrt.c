@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
+
 #include "q_rsqrt.h"
 
 float	q_rsqrtf(float number)

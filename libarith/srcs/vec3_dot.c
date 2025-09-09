@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   q_rsqrt.h                                          :+:      :+:    :+:   */
+/*   vec3_dot.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 15:26:34 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/07/14 22:01:58 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/01/30 12:57:13 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/07/14 22:21:46 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef Q_RSQRT_H
-# define Q_RSQRT_H
+#include "vecter3.h"
 
-typedef union u_cast
+float	vec3_dot(t_vec3 v1, t_vec3 v2)
 {
-	long int	li;
-	float		f;
-}	t_cast;
-
-float	q_rsqrtf(float number);
-
-#endif /* Q_RSQRT_H */
+	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
+}

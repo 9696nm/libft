@@ -13,27 +13,28 @@
 #ifndef QUATERNION_H
 # define QUATERNION_H
 
-# include <math.h>
-# include "q_rsqrt.h"
+# include "vecter3.h"
 
-typedef struct s_vecter3
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
+
+# define EPSILON 1e-6f
+
+typedef struct s_quaternion
 {
 	float	x;
 	float	y;
 	float	z;
-}	t_vec3;
-
-typedef struct s_quaternion
-{
 	float	w;
-	t_vec3	v;
 }	t_quat;
 
 /* quaternion.c */
 t_quat	quat_normalize(t_quat q);
 t_quat	quat_multiply(t_quat q1, t_quat q2);
-t_quat	quat_conjugate(const t_quat q);
-t_quat	quat_rotate(t_quat qv, t_quat q);
-t_quat	quat_axis_angle(float x, float y, float z, float angle);
+t_quat	quat_conjugate(t_quat q);
+t_quat	quat_rotate(t_quat src, t_quat rot);
+t_quat	quat_axis_angle(t_vec3 v, float angle);
+t_quat	quat_from_to(t_vec3 from, t_vec3 to);
 
 #endif /* QUATERNION_H */

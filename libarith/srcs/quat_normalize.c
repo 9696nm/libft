@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   q_rsqrt.h                                          :+:      :+:    :+:   */
+/*   quat_normalize.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 15:26:34 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/07/14 22:01:58 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/01/30 12:57:13 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/07/14 22:21:46 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef Q_RSQRT_H
-# define Q_RSQRT_H
+#include "q_rsqrt.h"
+#include "quaternion.h"
 
-typedef union u_cast
+// Normalisation of quaternions.
+t_quat	quat_normalize(t_quat q)
 {
-	long int	li;
-	float		f;
-}	t_cast;
+	float	norm;
 
-float	q_rsqrtf(float number);
-
-#endif /* Q_RSQRT_H */
+	norm = q_rsqrtf(q.w * q.w + q.x * q.x + q.y * q.y + q.z * q.z);
+	q.w *= norm;
+	q.x *= norm;
+	q.y *= norm;
+	q.z *= norm;
+	return (q);
+}

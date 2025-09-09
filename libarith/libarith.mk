@@ -25,8 +25,21 @@ ARITH_OBJ_DIR		=	$(OBJ_DIR)$(ARITH_DIR)
 
 # -sources-
 ARITH_SRCS			=	q_rsqrt.c \
-						quaternion.c \
-						vecter3.c \
+						coord_add.c \
+						coord_sub.c \
+						coord_to_vec3.c \
+						quat_axis_angle.c \
+						quat_conjugate.c \
+						quat_from_to.c \
+						quat_multiply.c \
+						quat_normalize.c \
+						quat_rotate.c \
+						vec3_add.c \
+						vec3_cross.c \
+						vec3_dot.c \
+						vec3_normalize.c \
+						vec3_sub.c \
+						vec3_to_coord.c \
 
 # -objects-
 ARITH_OBJS			=	$(patsubst %.c, $(ARITH_OBJ_DIR)%.o, $(ARITH_SRCS))

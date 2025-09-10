@@ -37,7 +37,9 @@ ARITH_SRCS			=	q_rsqrt.c \
 						vec3_add.c \
 						vec3_cross.c \
 						vec3_dot.c \
+						vec3_length.c \
 						vec3_normalize.c \
+						vec3_scale.c \
 						vec3_sub.c \
 						vec3_to_coord.c \
 

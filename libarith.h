@@ -53,9 +53,11 @@ t_quat		quat_from_to(t_vec3 from, t_vec3 to);
 /* vecter3.c */
 t_vec3		vec3_normalize(t_vec3 v);
 float		vec3_dot(t_vec3 v1, t_vec3 v2);
+float		vec3_length(t_vec3 v);
 t_vec3		vec3_cross(t_vec3 from, t_vec3 to);
 t_vec3		vec3_add(t_vec3 v1, t_vec3 v2);
 t_vec3		vec3_sub(t_vec3 v1, t_vec3 v2);
+t_vec3		vec3_scale(t_vec3 v, float scale);
 
 /* coordinates3.c */
 t_coord3	coord_add(t_coord3 c1, t_coord3 c2);

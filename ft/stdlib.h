@@ -22,4 +22,4 @@ long	ft_strtol(const char *nptr, char **endptr, int base);
 
 /* Non-standard */
 char	*ft_itoa(int n);
-double	ft_lite_atof(const char *str);
+double	lite_atof(const char *str);

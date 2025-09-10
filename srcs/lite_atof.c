@@ -67,7 +67,7 @@ static double	parse_decimal_part(const char **str)
 	return (result);
 }
 
-double	ft_lite_atof(const char *str)
+double	lite_atof(const char *str)
 {
 	int		sign;
 	double	integer_part;

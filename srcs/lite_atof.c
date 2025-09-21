@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
 #include "ft/ctype.h"
 
 static const char	*skip_whitespace(const char *str)
@@ -73,7 +75,7 @@ double	lite_atof(const char *str)
 	double	integer_part;
 	double	decimal_part;
 
-	if (!str)
+	if (str == NULL)
 		return (0.0);
 	str = skip_whitespace(str);
 	sign = parse_sign(&str);

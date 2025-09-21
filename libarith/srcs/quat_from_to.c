@@ -29,8 +29,7 @@ t_quat	quat_from_to(t_vec3 from, t_vec3 to)
 		if (fabsf(from.x) < EPSILON && fabsf(from.y) < EPSILON)
 			axis = (t_vec3){1.0f, 0.0f, 0.0f};
 		else
-			axis = (t_vec3){-from.y, from.x, 0.0f};
-		axis = vec3_normalize(axis);
+			axis = vec3_normalize((t_vec3){-from.y, from.x, 0.0f});
 		return (quat_axis_angle(axis, M_PI));
 	}
 	axis = vec3_normalize(vec3_cross(from, to));

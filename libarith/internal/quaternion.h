@@ -19,7 +19,7 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define EPSILON 1e-6f
+# define EPSILON 0.01
 
 typedef struct s_quaternion
 {

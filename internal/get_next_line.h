@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef INTERNAL_GET_NEXT_LINE_H
+# define INTERNAL_GET_NEXT_LINE_H
 
 # include <bits/posix1_lim.h>
 # include <limits.h>
@@ -57,4 +57,4 @@ typedef struct s_byte_array
 	int		fd;
 }	t_byte_array;
 
-#endif /* GET_NEXT_LINE_H */
+#endif /* INTERNAL_GET_NEXT_LINE_H */

@@ -12,39 +12,62 @@
 
 #include <stddef.h>
 
-static void	forword(unsigned char *ch_dest, unsigned char *ch_src, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-	{
-		ch_dest[i] = ch_src[i];
-		i++;
-	}
-}
-
-static void	revers(unsigned char *ch_dest, unsigned char *ch_src, size_t n)
-{
-	while (n-- > 0)
-		ch_dest[n] = ch_src[n];
-}
-
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned char	*ch_dest;
-	unsigned char	*ch_src;
+	unsigned char		*ch_dest;
+	const unsigned char	*ch_src;
+	size_t				i;
 
 	ch_dest = (unsigned char *)dest;
-	ch_src = (unsigned char *)src;
-	if (!ch_dest && !ch_src)
-		return (ch_dest);
+	ch_src = (const unsigned char *)src;
+	i = 0;
+	if (dest == src)
+		return (dest);
 	if (ch_dest > ch_src && ch_dest < ch_src + n)
-		revers(ch_dest, ch_src, n);
+		while (n-- > 0)
+			ch_dest[n] = ch_src[n];
 	else
-		forword(ch_dest, ch_src, n);
-	return (ch_dest);
+		while (i < n)
+		{
+			ch_dest[i] = ch_src[i];
+			i++;
+		}
+	return (dest);
 }
+
+// static void	forword(unsigned char *ch_dest, unsigned char *ch_src, size_t n)
+// {
+// 	size_t	i;
+
+// 	i = 0;
+// 	while (i < n)
+// 	{
+// 		ch_dest[i] = ch_src[i];
+// 		i++;
+// 	}
+// }
+
+// static void	revers(unsigned char *ch_dest, unsigned char *ch_src, size_t n)
+// {
+// 	while (n-- > 0)
+// 		ch_dest[n] = ch_src[n];
+// }
+
+// void	*ft_memmove(void *dest, const void *src, size_t n)
+// {
+// 	unsigned char	*ch_dest;
+// 	unsigned char	*ch_src;
+
+// 	ch_dest = (unsigned char *)dest;
+// 	ch_src = (unsigned char *)src;
+// 	if (!ch_dest && !ch_src)
+// 		return (ch_dest);
+// 	if (ch_dest > ch_src && ch_dest < ch_src + n)
+// 		revers(ch_dest, ch_src, n);
+// 	else
+// 		forword(ch_dest, ch_src, n);
+// 	return (ch_dest);
+// }
 
 // #include <stdio.h>
 // #include <string.h>

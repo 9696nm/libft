@@ -1,191 +1,156 @@
-# Libft 関数リファレンス
+# Libft Function List
+
+## 対象範囲
+
+この一覧は次の実装ディレクトリを対象にする。
+
+| ディレクトリ | 内容 |
+|---|---|
+| `srcs/` | libft 本体、追加ユーティリティ、`get_next_line` |
+| `libarith/srcs/` | 数値・クォータニオン系の追加ライブラリ |
+
+`static` 関数、コメントアウトされたテスト用関数は一覧対象外。
 
 ## 目次
-- [Libft 関数リファレンス](#libft-関数リファレンス)
+
+- [Libft Function List](#libft-function-list)
+	- [対象範囲](#対象範囲)
 	- [目次](#目次)
-	- [真偽判断関数](#真偽判断関数)
-		- [文字判定](#文字判定)
-		- [文字変換](#文字変換)
-	- [基本文字列操作](#基本文字列操作)
-		- [長さ・検索](#長さ検索)
-		- [比較](#比較)
-	- [メモリ操作](#メモリ操作)
-		- [初期化・埋め込み](#初期化埋め込み)
-		- [コピー](#コピー)
-		- [連結](#連結)
-	- [文字列連結・複製](#文字列連結複製)
-	- [文字列分割・トリム](#文字列分割トリム)
-	- [マッピング関数](#マッピング関数)
-	- [標準ライブラリ関数](#標準ライブラリ関数)
-		- [メモリ割り当て](#メモリ割り当て)
-		- [型変換](#型変換)
-	- [出力関数](#出力関数)
-	- [連結リスト操作](#連結リスト操作)
-		- [基本操作](#基本操作)
-		- [情報取得](#情報取得)
-		- [高度な操作](#高度な操作)
-	- [追加機能](#追加機能)
-	- [凡例](#凡例)
+	- [srcs/](#srcs)
+		- [文字判定・文字変換](#文字判定文字変換)
+		- [メモリ操作](#メモリ操作)
+		- [文字列操作](#文字列操作)
+		- [変換・メモリ確保](#変換メモリ確保)
+		- [出力・エラー補助](#出力エラー補助)
+		- [連結リスト](#連結リスト)
+		- [読み込み](#読み込み)
+	- [libarith/srcs/](#libarithsrcs)
+		- [高速逆平方根](#高速逆平方根)
+		- [クォータニオン](#クォータニオン)
+	- [補足](#補足)
 
 ---
 
-## 真偽判断関数
+## srcs/
 
-### 文字判定
-| 関数 | 説明 |
-|------|------|
-| `ft_isalpha` | アルファベット判定 |
-| `ft_isdigit` | 数字判定 |
-| `ft_isalnum` | 英数字判定 |
-| `ft_isprint` | 印字可能文字判定 |
-| `ft_isascii` | ASCII文字判定 |
-| `ft_isspace` ⚠️ | 空白文字判定 |
-| `ft_isvalue` ⚠️ | 値判定 |
+### 文字判定・文字変換
 
-### 文字変換
-| 関数 | 説明 |
-|------|------|
-| `ft_tolower` | 大文字→小文字変換 |
-| `ft_toupper` | 小文字→大文字変換 |
+| 関数 | ソース | 概要 |
+|---|---|---|
+| `ft_isalnum` | `srcs/ft_isalnum.c` | 英数字判定 |
+| `ft_isalpha` | `srcs/ft_isalpha.c` | アルファベット判定 |
+| `ft_isascii` | `srcs/ft_isascii.c` | ASCII 範囲判定 |
+| `ft_isdigit` | `srcs/ft_isdigit.c` | 数字判定 |
+| `ft_islower` | `srcs/ft_islower.c` | 小文字判定 |
+| `ft_isprint` | `srcs/ft_isprint.c` | 印字可能文字判定 |
+| `ft_isspace` | `srcs/ft_isspace.c` | 空白文字判定 |
+| `ft_isupper` | `srcs/ft_isupper.c` | 大文字判定 |
+| `ft_isvalue` | `srcs/ft_isvalue.c` | 文字列が数値として扱えるか判定 |
+| `ft_tolower` | `srcs/ft_tolower.c` | 大文字を小文字へ変換 |
+| `ft_toupper` | `srcs/ft_toupper.c` | 小文字を大文字へ変換 |
 
----
+### メモリ操作
 
-## 基本文字列操作
+| 関数 | ソース | 概要 |
+|---|---|---|
+| `ft_bzero` | `srcs/ft_bzero.c` | 指定領域をゼロクリア |
+| `ft_memchr` | `srcs/ft_memchr.c` | メモリ領域から指定バイトを検索 |
+| `ft_memcmp` | `srcs/ft_memcmp.c` | メモリ領域をバイト単位で比較 |
+| `ft_memcpy` | `srcs/ft_memcpy.c` | メモリ領域をコピー |
+| `ft_memmove` | `srcs/ft_memmove.c` | 重複を考慮してメモリ領域をコピー |
+| `ft_memset` | `srcs/ft_memset.c` | 指定バイトでメモリ領域を埋める |
 
-### 長さ・検索
-| 関数 | 説明 |
-|------|------|
-| `ft_strlen` | 文字列の長さを取得 |
-| `ft_strchr` | 最初に見つかった文字の位置を返す |
-| `ft_strrchr` | 最後に見つかった文字の位置を返す |
-| `ft_memchr` | 指定長さ内で文字を検索 |
-| `ft_strnstr` | 文字列内で部分文字列を検索 |
+### 文字列操作
 
-### 比較
-| 関数 | 説明 |
-|------|------|
-| `ft_memcmp` | バイト単位で比較 |
-| `ft_strcmp` ⚠️ | 文字列比較（長さ指定なし） |
-| `ft_strncmp` | 文字列比較（長さ指定あり、null対応） |
+| 関数 | ソース | 概要 |
+|---|---|---|
+| `ft_split` | `srcs/ft_split.c` | 区切り文字で文字列を分割 |
+| `ft_split_toi` | `srcs/ft_split_toi.c` | 区切り文字で分割した文字列を `int` 配列へ変換 |
+| `ft_strchr` | `srcs/ft_strchr.c` | 文字列から最初の指定文字を検索 |
+| `ft_strcmp` | `srcs/ft_strcmp.c` | 文字列を比較 |
+| `ft_strdup` | `srcs/ft_strdup.c` | 文字列を複製 |
+| `ft_striteri` | `srcs/ft_striteri.c` | 文字列の各文字に関数を適用 |
+| `ft_strjoin` | `srcs/ft_strjoin.c` | 2 つの文字列を連結して新規確保 |
+| `ft_strlcat` | `srcs/ft_strlcat.c` | サイズ制限付き文字列連結 |
+| `ft_strlcpy` | `srcs/ft_strlcpy.c` | サイズ制限付き文字列コピー |
+| `ft_strlen` | `srcs/ft_strlen.c` | 文字列長を取得 |
+| `ft_strmapi` | `srcs/ft_strmapi.c` | 各文字への関数適用結果で新しい文字列を作成 |
+| `ft_strncmp` | `srcs/ft_strncmp.c` | 最大 `n` 文字まで文字列を比較 |
+| `ft_strnstr` | `srcs/ft_strnstr.c` | 長さ制限付き部分文字列検索 |
+| `ft_strrchr` | `srcs/ft_strrchr.c` | 文字列から最後の指定文字を検索 |
+| `ft_strtrim` | `srcs/ft_strtrim.c` | 先頭・末尾から指定文字集合を削除 |
+| `ft_substr` | `srcs/ft_substr.c` | 部分文字列を新規確保 |
 
----
+### 変換・メモリ確保
 
-## メモリ操作
+| 関数 | ソース | 概要 |
+|---|---|---|
+| `ft_atoi` | `srcs/ft_atoi.c` | 文字列を `int` に変換 |
+| `ft_calloc` | `srcs/ft_calloc.c` | ゼロ初期化済みメモリを確保 |
+| `ft_itoa` | `srcs/ft_itoa.c` | `int` を文字列へ変換 |
+| `ft_strtol` | `srcs/ft_strtol.c` | 基数指定付きで文字列を `long` に変換 |
 
-### 初期化・埋め込み
-| 関数 | 説明 |
-|------|------|
-| `ft_memset` | 指定値でメモリを埋める |
-| `ft_bzero` | nullでメモリを埋める |
+### 出力・エラー補助
 
-### コピー
-| 関数 | 説明 |
-|------|------|
-| `ft_memcpy` | バイトコピー |
-| `ft_memmove` | 重複対応のメモリコピー |
-| `ft_strlcpy` | null終端付き文字列コピー |
+| 関数 | ソース | 概要 |
+|---|---|---|
+| `ft_putchar_fd` | `srcs/ft_putchar_fd.c` | 文字をファイルディスクリプタへ出力 |
+| `ft_putstr_fd` | `srcs/ft_putstr_fd.c` | 文字列をファイルディスクリプタへ出力 |
+| `ft_putendl_fd` | `srcs/ft_putendl_fd.c` | 文字列と改行をファイルディスクリプタへ出力 |
+| `ft_putnbr_fd` | `srcs/ft_putnbr_fd.c` | 整数をファイルディスクリプタへ出力 |
+| `ft_putbit` | `srcs/ft_putbit.c` | 整数をビット列として標準出力へ出力 |
+| `print_bits` | `srcs/ft_putbit.c` | 任意メモリ領域をビット列として標準出力へ出力 |
+| `perrturn` | `srcs/perrturn.c` | `perror` を呼び、指定ステータスを返す |
+| `ret_errmsg` | `srcs/ret_errmsg.c` | メッセージを標準エラーへ出し、指定コードを返す |
 
-### 連結
-| 関数 | 説明 |
-|------|------|
-| `ft_strlcat` | 文字列連結 |
+### 連結リスト
 
----
+| 関数 | ソース | 概要 |
+|---|---|---|
+| `ft_lstadd_back` | `srcs/ft_lstadd_back.c` | リスト末尾にノードを追加 |
+| `ft_lstadd_front` | `srcs/ft_lstadd_front.c` | リスト先頭にノードを追加 |
+| `ft_lstclear` | `srcs/ft_lstclear.c` | リスト全体を削除 |
+| `ft_lstdelone` | `srcs/ft_lstdelone.c` | 単一ノードを削除 |
+| `ft_lstiter` | `srcs/ft_lstiter.c` | 各ノードに関数を適用 |
+| `ft_lstlast` | `srcs/ft_lstlast.c` | 末尾ノードを取得 |
+| `ft_lstmap` | `srcs/ft_lstmap.c` | 各ノードを変換して新しいリストを作成 |
+| `ft_lstnew` | `srcs/ft_lstnew.c` | 新しいノードを作成 |
+| `ft_lstsize` | `srcs/ft_lstsize.c` | リストのノード数を取得 |
 
-## 文字列連結・複製
+### 読み込み
 
-| 関数 | 説明 |
-|------|------|
-| `ft_strdup` | 文字列を複製 |
-| `ft_substr` | 開始位置を指定して部分文字列を複製 |
-| `ft_strjoin` | 文字列を連結して複製 |
-
----
-
-## 文字列分割・トリム
-
-| 関数 | 説明 |
-|------|------|
-| `ft_split` | 指定文字で文字列を分割 |
-| `ft_strtrim` | 前後の指定文字を削除 |
-| `ft_split_toi` ⚠️ | 文字列をint配列に変換（先頭に長さ格納） |
-
----
-
-## マッピング関数
-
-| 関数 | 説明 |
-|------|------|
-| `ft_striteri` | 文字列の各文字に関数を適用 |
-| `ft_strmapi` | 適用結果を新しい文字列として複製 |
-
----
-
-## 標準ライブラリ関数
-
-### メモリ割り当て
-| 関数 | 説明 |
-|------|------|
-| `ft_calloc` | メモリ割り当て後にbzero実行 |
-
-### 型変換
-| 関数 | 説明 |
-|------|------|
-| `ft_atoi` | 文字列→整数変換 |
-| `ft_itoa` | 整数→文字列変換 |
-| `ft_strtol` ⚠️ | 文字列→long変換（推奨、機能豊富） |
+| 関数 | ソース | 概要 |
+|---|---|---|
+| `get_next_line` | `srcs/get_next_line.c` | ファイルディスクリプタから 1 行ずつ読み込む |
 
 ---
 
-## 出力関数
+## libarith/srcs/
 
-| 関数 | 説明 |
-|------|------|
-| `ft_putchar_fd` | 文字をファイルディスクリプタに出力 |
-| `ft_putstr_fd` | 文字列をファイルディスクリプタに出力 |
-| `ft_putendl_fd` | 文字列+改行をファイルディスクリプタに出力 |
-| `ft_putnbr_fd` | 整数をファイルディスクリプタに出力 |
-| `ft_putbit` ⚠️ | 2進数形式（0b）で出力 |
+### 高速逆平方根
 
----
+| 関数 | ソース | 概要 |
+|---|---|---|
+| `q_rsqrtf` | `libarith/srcs/q_rsqrt.c` | `1 / sqrtf(number)` の近似値を高速計算 |
 
-## 連結リスト操作
+### クォータニオン
 
-### 基本操作
-| 関数 | 説明 |
-|------|------|
-| `ft_lstnew` | 新しいリストノードを作成 |
-| `ft_lstdelone` | 単一ノードを削除 |
-| `ft_lstadd_front` | リストの先頭に追加 |
-| `ft_lstadd_back` | リストの末尾に追加 |
-
-### 情報取得
-| 関数 | 説明 |
-|------|------|
-| `ft_lstlast` | 最後のノードのポインタを返す |
-| `ft_lstsize` | リストのサイズを返す |
-
-### 高度な操作
-| 関数 | 説明 |
-|------|------|
-| `ft_lstiter` | 全ノードに関数を適用 |
-| `ft_lstclear` | 全ノードを解放 |
-| `ft_lstmap` | 全ノードをコピー |
+| 関数 | ソース | 概要 |
+|---|---|---|
+| `quater_normalize` | `libarith/srcs/quaternion.c` | クォータニオンを正規化 |
+| `quater_multiply` | `libarith/srcs/quaternion.c` | 2 つのクォータニオンを乗算 |
+| `quater_conjugate` | `libarith/srcs/quaternion.c` | 共役クォータニオンを取得 |
+| `quater_rotate` | `libarith/srcs/quaternion.c` | クォータニオンで 3D ベクトルを回転 |
+| `quater_axis_angle` | `libarith/srcs/quaternion.c` | 軸と角度からクォータニオンを生成 |
 
 ---
 
-## 追加機能
+## 補足
 
-| 関数 | 説明 |
-|------|------|
-| `get_next_line` ⚠️ | ファイルから1行ずつ読み込み |
-| `perrturn` ⚠️ | returnとperrorを同時に動かすラッパー |
-| `ret_errmsg` ⚠️ | returnとstderr出力を同時に動かすラッパー |
+| 種別 | ヘッダ |
+|---|---|
+| libft 本体 | `libft.h`, `ft/ctype.h`, `ft/string.h`, `ft/stdlib.h`, `ft/stdio.h` |
+| get_next_line | `get_next_line.h` |
+| libarith | `libarith.h` |
 
----
-
-## 凡例
-
-- ⚠️ : 追加実装関数（標準libftには含まれない）
-- 再実装関数は `ft_` プレフィックス付き
-- ファイルディスクリプタ関数は `_fd` サフィックス付き
+`srcs/ft_strtol.c` には `__ft_strtol` も定義されているが、公開ヘッダに載る通常利用 API は `ft_strtol`。

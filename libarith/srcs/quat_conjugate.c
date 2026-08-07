@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stdlib.h                                           :+:      :+:    :+:   */
+/*   quat_conjugate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/13 12:33:33 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/07/26 13:42:04 by hana/hmori       ###   ########.fr       */
+/*   Created: 2025/01/30 12:57:13 by hana/hmori        #+#    #+#             */
+/*   Updated: 2025/07/14 22:21:46 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "quaternion.h"
 
-#include <stddef.h> /* size_t */
+// Set up conjugate quaternions.
+t_quat	quat_conjugate(t_quat q)
+{
+	t_quat	q_conj;
 
-/* Original */
-int		ft_atoi(const char *str);
-void	*ft_calloc(size_t n, size_t size);
-
-long	ft_strtol(const char *nptr, char **endptr, int base);
-
-/* Non-standard */
-char	*ft_itoa(int n);
-double	lite_atof(const char *str);
+	q_conj.w = q.w;
+	q_conj.x = -q.x;
+	q_conj.y = -q.y;
+	q_conj.z = -q.z;
+	return (q_conj);
+}

@@ -19,6 +19,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	size_t	count_dst;
 	size_t	count_src;
 
+	count_dst = 0;
 	count_src = 0;
 	if (dstsize)
 	{

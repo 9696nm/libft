@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quaternion.h                                       :+:      :+:    :+:   */
+/*   coordinates3.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,31 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef QUATERNION_H
-# define QUATERNION_H
+#ifndef COORDINATES3_H
+# define COORDINATES3_H
 
-# include "vecter3.h"
+struct						s_vecter3;
+typedef struct s_vecter3	t_vec3;
 
-# ifndef M_PI
-#  define M_PI 3.14159265358979323846
-# endif
-
-# define EPSILON 0.01
-
-typedef struct s_quaternion
+typedef struct s_coordinates3
 {
 	float	x;
 	float	y;
 	float	z;
-	float	w;
-}	t_quat;
+}	t_coord3;
 
-/* quaternion.c */
-t_quat	quat_normalize(t_quat q);
-t_quat	quat_multiply(t_quat q1, t_quat q2);
-t_quat	quat_conjugate(t_quat q);
-t_quat	quat_rotate(t_quat src, t_quat rot);
-t_quat	quat_axis_angle(t_vec3 v, float angle);
-t_quat	quat_from_to(t_vec3 from, t_vec3 to);
+/* coordinates3.c */
+t_coord3	coord_add(t_coord3 c1, t_coord3 c2);
+t_coord3	coord_sub(t_coord3 c1, t_coord3 c2);
 
-#endif /* QUATERNION_H */
+/* conversion.c */
+t_coord3	vec3_to_coord(t_vec3 vec);
+
+#endif /* COORDINATES3_H */

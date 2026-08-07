@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
+
 #include "q_rsqrt.h"
 
 float	q_rsqrtf(float number)
@@ -18,6 +20,12 @@ float	q_rsqrtf(float number)
 	t_cast		cast;
 	const float	threehalfs = 1.5F;
 
+	if (number == 1.0f)
+		return (1.0f);
+	if (number == 0.0f)
+		return (INFINITY);
+	if (number < 0.0f)
+		return (NAN);
 	cast.li = 0;
 	x2 = number * 0.5F;
 	cast.f = number;

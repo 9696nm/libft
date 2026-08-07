@@ -12,18 +12,23 @@
 
 #include <stddef.h>
 
-void	*ft_memcpy(void *buf1, const void *buf2, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	unsigned char	*ch_buf1;
-	unsigned char	*ch_buf2;
+	size_t				i;
+	unsigned char		*buf1;
+	const unsigned char	*buf2;
 
-	ch_buf1 = (unsigned char *)buf1;
-	ch_buf2 = (unsigned char *)buf2;
-	if (ch_buf1 == NULL && ch_buf2 == NULL)
-		return (NULL);
-	while (n-- > 0)
-		ch_buf1[n] = ch_buf2[n];
-	return (ch_buf1);
+	if (n == 0)
+		return (dest);
+	buf1 = (unsigned char *)dest;
+	buf2 = (const unsigned char *)src;
+	i = 0;
+	while (i < n)
+	{
+		buf1[i] = buf2[i];
+		i++;
+	}
+	return (dest);
 }
 
 // #include <stdio.h>
@@ -31,15 +36,44 @@ void	*ft_memcpy(void *buf1, const void *buf2, size_t n)
 
 // int	main(void)
 // {
-// 	char	s1[7] = {1, 1, 1, 1, 1, 1, 1};
-// 	char	s2[7] = {"123\0xyz"};
+// 	char	s1[13] = "hello world!";
+// 	char	s2[3] = "42";
 
-// 	ft_memcpy(NULL, NULL, 3);
-// 	for (int i = 0; i < 7; i++)
-// 		printf("%#x\n", s1[i]);
+// /*
+// 	for (int i = 0; i < 13; i++)
+// 		printf("%2i (%#4x) : %c\n", i, s1[i], s1[i]);
+// 	for (int i = 0; i < 3; i++)
+// 		printf("%2i (%#4x) : %c\n", i, s2[i], s2[i]);
+// */
+// /*
+// 	printf("s1 : %p\n", s1);
+// 	printf("s2 : %p\n", s2);
+
+// 	printf("ret: %p\n", memcpy(NULL, NULL, 0));	// (nil)
+// 	printf("ret: %p\n", memcpy(s1, NULL, 0));	// s1 address
+// 	printf("ret: %p\n", memcpy(NULL, s2, 0));	// (nil)
+// 	printf("ret: %p\n", memcpy(s1, s2, 0));		// s1 address
+
+// 	printf("ret: %p\n", memcpy(NULL, NULL, 1));	// segmentation fault
+// 	printf("ret: %p\n", memcpy(s1, NULL, 1));	// segmentation fault
+// 	printf("ret: %p\n", memcpy(NULL, s2, 1));	// segmentation fault
+// 	printf("ret: %p\n", memcpy(s1, s2, 1));		// s1 address
+// */
+// /* 
+// 	memcpy(s1, NULL, 0);
+// 	for (int i = 0; i < 13; i++)
+// 		printf("%2i (%#4x) : %c\n", i, s1[i], s1[i]);
+// */
+// /* 
+// 	memcpy(s1, s2, 0);
+// 	for (int i = 0; i < 13; i++)
+// 		printf("%2i (%#4x) : %c\n", i, s1[i], s1[i]);
 // 	return (0);
+// */
+// /*
+// 	memcpy(s1, s2, 10);
+// 	for (int i = 0; i < 13; i++)
+// 		printf("%2i (%#4x) : %c\n", i, s1[i], s1[i]);
+// 	return (0);
+// */
 // }
-
-/*
-オーバー分は未定義で良い
-*/

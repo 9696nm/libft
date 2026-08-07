@@ -57,7 +57,7 @@ ifneq ($(filter bonus, $(COMPILE_TYPE)),)
 TARGET_SRCS		+=	$(BONUS_SRCS)
 endif
 ifneq ($(filter extra, $(COMPILE_TYPE)),)
-TARGET_SRCS		=	$(EXTRA_SRCS)
+TARGET_SRCS		+=	$(EXTRA_SRCS)
 endif
 
 # -objects-

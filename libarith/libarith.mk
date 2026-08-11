@@ -46,7 +46,7 @@ ARITH_SRCS			=	q_rsqrt.c \
 
 # -- Objs --
 ARITH_OBJS			=	$(patsubst %.c, $(ARITH_OBJ_DIR)/%.o, $(ARITH_SRCS))
-ARITH_DEPS			=	$(OBJS:.o=.d)
+ARITH_DEPS			=	$(ARITH_OBJS:.o=.d)
 
 # -- Rules --
 .PHONY: arith
@@ -56,8 +56,9 @@ $(ARITH_TARGET): $(ARITH_OBJS)
 	$(AR) $(ARFLAGS) $@ $^
 	@echo $(GREEN)"--- $(ARITH_PROJECT_NAME) compiled successfully ---"$(RESET)
 
-$(ARITH_OBJ_DIR)%.o: $(ARITH_SRC_DIR)%.c | $(ARITH_OBJ_DIR)
+$(ARITH_OBJ_DIR)/%.o: $(ARITH_SRC_DIR)/%.c | $(ARITH_OBJ_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
+	@echo $@
 
 $(ARITH_OBJ_DIR):
 	@mkdir -p $(ARITH_OBJ_DIR)

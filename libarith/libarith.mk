@@ -58,7 +58,6 @@ $(ARITH_TARGET): $(ARITH_OBJS)
 
 $(ARITH_OBJ_DIR)/%.o: $(ARITH_SRC_DIR)/%.c | $(ARITH_OBJ_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
-	@echo $@
 
 $(ARITH_OBJ_DIR):
 	@mkdir -p $(ARITH_OBJ_DIR)

@@ -83,7 +83,7 @@ RESET			:=	"\033[0m"
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(AR) $(ARFLAGS) $@ $<
+	$(AR) $(ARFLAGS) $@ $^
 	@echo $(GREEN)"--- $(PROJECT_NAME) compiled successfully $(COMPILE_TYPE) ---"$(RESET)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)

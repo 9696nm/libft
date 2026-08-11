@@ -12,7 +12,6 @@
 
 #include <errno.h>
 #include <unistd.h>
-#include <limits.h>
 
 #include "ft/string.h"
 

@@ -25,7 +25,9 @@ void	ft_putchar_fd(char c, int fd)
 		res = write(fd, &c, 1);
 		if (errno == EINTR && -1 == res)
 			continue ;
-		return ;
+		else if (res <= 0)
+			return ;
+		len -= (size_t)res;
 	}
 }
 

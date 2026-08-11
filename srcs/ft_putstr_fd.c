@@ -10,14 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include <unistd.h>
 
 #include "ft/string.h"
 
 void	ft_putstr_fd(char *str, int fd)
 {
-	if (str)
-		write(fd, str, ft_strlen(str));
+	size_t	len;
+	ssize_t	res;
+
+	if (!str)
+		return ;
+	len = ft_strlen(str);
+	while (0 < len)
+	{
+		errno = 0;
+		res = write(fd, str, len);
+		if (errno == EINTR && -1 == res)
+			continue ;
+		else if (res <= 0)
+			return ;
+		str += res;
+		len -= (size_t)res;
+	}
 }
 
 // void	ft_putstr_fd(char *str, int fd)

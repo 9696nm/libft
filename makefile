@@ -128,5 +128,5 @@ re: fclean
 	$(MAKE) all
 
 # -- Include --
--include $(CPPDEPS)
+-include $(DEPS)
 -include libarith/libarith.mk

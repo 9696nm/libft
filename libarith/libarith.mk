@@ -10,20 +10,21 @@
 #                                                                              #
 # **************************************************************************** #
 
-# Arithmetic Library Module
-ARITH_TARGET		=	libarith.a
+# -- Info --
+ARITH_TARGET		:=	libarith.a
 ARITH_PROJECT_NAME	=	Libarith
 
 CLEAN_TARGETS		+=	arith_clean
 
+# -- Dir --
+INC_DIRS			+=	$(ARITH_INC_DIR)
 
-# -target dir-
-ARITH_DIR			=	libarith/
-ARITH_INC_DIR		=	$(ARITH_DIR)internal/
-ARITH_SRC_DIR		=	$(ARITH_DIR)$(SRC_DIR)
-ARITH_OBJ_DIR		=	$(OBJ_DIR)$(ARITH_DIR)
+ARITH_DIR			=	libarith
+ARITH_INC_DIR		=	$(ARITH_DIR)/internal
+ARITH_SRC_DIR		=	$(ARITH_DIR)/$(SRC_DIR)
+ARITH_OBJ_DIR		=	$(OBJ_DIR)/$(ARITH_DIR)
 
-# -sources-
+# -- Srcs --
 ARITH_SRCS			=	q_rsqrt.c \
 						coord_add.c \
 						coord_sub.c \
@@ -43,18 +44,12 @@ ARITH_SRCS			=	q_rsqrt.c \
 						vec3_sub.c \
 						vec3_to_coord.c \
 
-# -objects-
-ARITH_OBJS			=	$(patsubst %.c, $(ARITH_OBJ_DIR)%.o, $(ARITH_SRCS))
-ARITH_DEPS			=	$(patsubst %.c, $(ARITH_OBJ_DIR)%.d, $(ARITH_SRCS))
+# -- Objs --
+ARITH_OBJS			=	$(patsubst %.c, $(ARITH_OBJ_DIR)/%.o, $(ARITH_SRCS))
+ARITH_DEPS			=	$(OBJS:.o=.d)
 
-# -add to main targets-
-INC_DIR				+=	$(ARITH_INC_DIR)
-
-# -include-
--include $(ARITH_DEPS)
-
-
-# -rule-
+# -- Rules --
+.PHONY: arith
 arith: $(ARITH_TARGET)
 
 $(ARITH_TARGET): $(ARITH_OBJS)
@@ -62,11 +57,12 @@ $(ARITH_TARGET): $(ARITH_OBJS)
 	@echo $(GREEN)"--- $(ARITH_PROJECT_NAME) compiled successfully ---"$(RESET)
 
 $(ARITH_OBJ_DIR)%.o: $(ARITH_SRC_DIR)%.c | $(ARITH_OBJ_DIR)
-	$(CC) $(WARNING_FLAG) $(OPT_FLAGS) $(INC_PATHS) $(DEPEND_FLAGS) -c $< -o $@
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
 
 $(ARITH_OBJ_DIR):
 	@mkdir -p $(ARITH_OBJ_DIR)
 
+.PHONY: arith_clean
 arith_clean:
 	@if [ -f $(ARITH_TARGET) ]; then \
 		rm -f $(ARITH_TARGET); \
@@ -75,4 +71,5 @@ arith_clean:
 		echo $(CYAN)"$(ARITH_PROJECT_NAME) archive has already been deleted."$(RESET); \
 	fi
 
-.PHONY: arith arith_clean
+# -- Include --
+-include $(ARITH_DEPS)

@@ -67,7 +67,7 @@ CPPDEFS			+=	$(DEF)
 ifeq ($(DEBUG),1)
 CFLAGS			+=	-g -Og  -Wuninitialized -Wfatal-errors -Wshadow
 else
-CFLAGS			+=	-O0
+CFLAGS			+=	-O3
 endif
 
 # --color code--

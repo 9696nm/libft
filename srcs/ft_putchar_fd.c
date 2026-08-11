@@ -10,11 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include <unistd.h>
 
 void	ft_putchar_fd(char c, int fd)
 {
-	write(fd, &c, 1);
+	size_t	len;
+	ssize_t	res;
+
+	len = 1;
+	while (0 < len)
+	{
+		errno = 0;
+		res = write(fd, &c, 1);
+		if (errno == EINTR && -1 == res)
+			continue ;
+		return ;
+	}
 }
 
 // int	main(void)

@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#define _POSIX_C_SOURCE 200809L
+
 #include "internal/get_next_line.h"
 
 #include <unistd.h>

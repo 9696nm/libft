@@ -12,6 +12,7 @@
 
 #ifndef INTERNAL_GET_NEXT_LINE_H
 # define INTERNAL_GET_NEXT_LINE_H
+
 # include <limits.h>
 # include <unistd.h>
 # include <stddef.h>

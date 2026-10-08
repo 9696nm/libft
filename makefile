@@ -90,7 +90,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $@
 
 .PHONY: bonus
 bonus:
@@ -115,7 +115,7 @@ fclean:
 else
 fclean: clean
 endif
-	$(MAKE) $(CLEAN_TARGETS)
+	@$(MAKE) $(CLEAN_TARGETS)
 	@if [ -f $(TARGET) ]; then \
 		rm -f $(TARGET); \
 		echo $(RED)"$(PROJECT_NAME) $(TARGET) has been deleted !"$(RESET); \
@@ -125,7 +125,7 @@ endif
 
 .PHONY: re
 re: fclean
-	$(MAKE) all
+	@$(MAKE) all
 
 # -- Include --
 -include $(DEPS)
